@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30709.132
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "image-modification", "image-modification\image-modification.csproj", "{2438ED2E-3DDE-4A20-A272-20720F1D1FCF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2438ED2E-3DDE-4A20-A272-20720F1D1FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2438ED2E-3DDE-4A20-A272-20720F1D1FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2438ED2E-3DDE-4A20-A272-20720F1D1FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2438ED2E-3DDE-4A20-A272-20720F1D1FCF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D554358E-2F9A-429B-B2F6-C8417835E931}
+	EndGlobalSection
+EndGlobal
