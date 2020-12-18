@@ -4,9 +4,9 @@ namespace image_modification
 {
     interface IFilter
     {
-        BitmapImage Filter1(BitmapImage image);
-        BitmapImage Filter2(BitmapImage image);
-        BitmapImage Filter3(BitmapImage image);
+        ImageModel Filter1(ImageModel image);
+        ImageModel Filter2(ImageModel image);
+        ImageModel Filter3(ImageModel image);
 
     }
 }

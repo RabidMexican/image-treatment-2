@@ -3,18 +3,18 @@ using System.IO;
 
 namespace image_modification
 {
-    class BitmapImage
+    class ImageModel
     {
         private Bitmap image;
 
-        public BitmapImage(string fileName)
+        public ImageModel(string fileName)
         {
             StreamReader streamReader = new StreamReader(fileName);
             image = (Bitmap)Image.FromStream(streamReader.BaseStream);
             streamReader.Close();
         }
 
-        public BitmapImage(Bitmap source)
+        public ImageModel(Bitmap source)
         {
             image = source;
         }

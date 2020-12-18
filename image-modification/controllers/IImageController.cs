@@ -4,7 +4,7 @@ namespace image_modification
 {
     interface IImageController
     {
-        BitmapImage getPreviewImage(int canvasSize);
-        BitmapImage getResultImage();
+        ImageModel getPreviewImage(int canvasSize);
+        ImageModel getResultImage();
     }
 }

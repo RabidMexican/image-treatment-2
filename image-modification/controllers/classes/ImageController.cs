@@ -6,21 +6,21 @@ namespace image_modification.controllers.classes
 {
     class ImageController : IImageController
     {
-        private BitmapImage image;
+        private ImageModel image;
 
-        public ImageController(BitmapImage source)
+        public ImageController(ImageModel source)
         {
             image = source;
         }
 
         // Returns the full quality image
-        public BitmapImage getResultImage()
+        public ImageModel getResultImage()
         {
             return image;
         }
 
         // Creates a square bitmap for displaying in the app
-        public BitmapImage getPreviewImage(int width)
+        public ImageModel getPreviewImage(int width)
         {
             // TODO : replace this with something better?
             float ratio = 1.0f;
@@ -49,7 +49,7 @@ namespace image_modification.controllers.classes
                 graphicsResult.Flush();
             }
 
-            return new BitmapImage(bitmapResult);
+            return new ImageModel(bitmapResult);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace image_modification.views
             // If image is selected 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                BitmapImage image = new BitmapImage(ofd.FileName);
+                ImageModel image = new ImageModel(ofd.FileName);
                 IImageController ic = new ImageController(image);
 
                 Bitmap myBitmap = ic.getPreviewImage(PREVIEW_WIDTH).getImage();
