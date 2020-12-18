@@ -8,10 +8,9 @@ We want a program that does 0 to 3 filters and 0 to 3 edge detections.
 The code must have the maximum possible code coverage.
 
 ## Requriements
-1. Load an image from the disk - Perform 0 to 3 filters and 0 to 3 edge detections - Save the modified image into a file
-2. Mandatory structure of the code (At least one of each)
-3. Use interfaces to load and save files 
-4. Use interfaces to separate the code from the presentation layer
+1. Load an image from the disk 
+2. Perform 0 to 3 filters and 0 to 3 edge detections 
+3. Save the modified image into a file
 
 ## Must Have
 * Exceptions 
