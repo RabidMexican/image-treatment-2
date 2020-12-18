@@ -50,12 +50,6 @@
     <Compile Include="controllers\classes\FilterController.cs" />
     <Compile Include="controllers\IEdgeDetection.cs" />
     <Compile Include="controllers\IFilter.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="models\classes\Image.cs" />
     <Compile Include="models\IImage.cs" />
     <Compile Include="Program.cs" />
