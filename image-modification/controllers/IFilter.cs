@@ -1,13 +1,12 @@
-﻿
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace image_modification
 {
     interface IFilter
     {
-        Bitmap Filter1(Bitmap image);
-        Bitmap Filter2(Bitmap image);
-        Bitmap Filter3(Bitmap image);
+        BitmapImage Filter1(BitmapImage image);
+        BitmapImage Filter2(BitmapImage image);
+        BitmapImage Filter3(BitmapImage image);
 
     }
 }

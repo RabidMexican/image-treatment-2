@@ -4,9 +4,9 @@ namespace image_modification
 {
     interface IEdgeDetection
     {
-        Bitmap EdgeDet1(Bitmap image);
-        Bitmap EdgeDet2(Bitmap image);
-        Bitmap EdgeDet3(Bitmap image);
+        BitmapImage EdgeDet1(BitmapImage image);
+        BitmapImage EdgeDet2(BitmapImage image);
+        BitmapImage EdgeDet3(BitmapImage image);
 
     }
 }

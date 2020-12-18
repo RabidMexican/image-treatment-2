@@ -4,17 +4,17 @@ namespace image_modification.controllers
 {
     class FilterController : IFilter
     {
-        public Bitmap Filter1(Bitmap image)
+        public BitmapImage Filter1(BitmapImage image)
         {
             return image;
         }
 
-        public Bitmap Filter2(Bitmap image)
+        public BitmapImage Filter2(BitmapImage image)
         {
             return image;
         }
 
-        public Bitmap Filter3(Bitmap image)
+        public BitmapImage Filter3(BitmapImage image)
         {
             return image;
         }

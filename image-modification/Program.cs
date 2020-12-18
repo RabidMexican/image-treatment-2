@@ -13,7 +13,7 @@ namespace image_modification
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ExampleWindow());
+            Application.Run(new Main());
         }
 
     }
