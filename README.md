@@ -1,7 +1,7 @@
 # image-treatment-2
 
 ## Group 19 Unit Testing
-Ben Pocklington &amp; Victor Bonny
+### Ben Pocklington &amp; Victor Bonny
 
 Create a new application based on your previous projects.
 We want a program that does 0 to 3 filters and 0 to 3 edge detections.
