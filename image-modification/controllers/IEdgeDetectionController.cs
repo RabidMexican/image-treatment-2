@@ -1,6 +1,6 @@
 ﻿namespace image_modification
 {
-    interface IEdgeDetection
+    interface IEdgeDetectionController
     {
         ImageModel EdgeDet1(ImageModel image);
         ImageModel EdgeDet2(ImageModel image);

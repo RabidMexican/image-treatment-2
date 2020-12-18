@@ -1,6 +1,6 @@
 ﻿namespace image_modification
 {
-    interface IFilter
+    interface IFilterController
     {
         ImageModel Filter1(ImageModel image);
         ImageModel Filter2(ImageModel image);

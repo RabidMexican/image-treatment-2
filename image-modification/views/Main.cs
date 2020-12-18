@@ -8,6 +8,7 @@ namespace image_modification.views
     public partial class Main : Form
     {
         private const int PREVIEW_WIDTH = 400;
+        private ImageController imageController;
 
         public Main()
         {
@@ -31,9 +32,21 @@ namespace image_modification.views
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 ImageModel image = new ImageModel(ofd.FileName);
-                IImageController imageController = new ImageController(image);
+                imageController = new ImageController(image);
 
                 Bitmap myBitmap = imageController.getPreviewImage(PREVIEW_WIDTH).getImage();
+
+                imageController.AddFilter(0);
+                imageController.AddFilter(1);
+                imageController.AddFilter(2);
+
+                imageController.AddEdgeDetection(2);
+                imageController.AddEdgeDetection(1);
+                imageController.AddEdgeDetection(0);
+
+                imageController.applyFilters();
+                imageController.applyEdgeDetection();
+
                 previewImage.Image = myBitmap;
             }
         }
