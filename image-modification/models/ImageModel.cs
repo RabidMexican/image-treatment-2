@@ -7,9 +7,9 @@ namespace image_modification
     {
         private Bitmap image;
 
-        public ImageModel(string fileName)
+        public ImageModel(string source)
         {
-            StreamReader streamReader = new StreamReader(fileName);
+            StreamReader streamReader = new StreamReader(source);
             image = (Bitmap)Image.FromStream(streamReader.BaseStream);
             streamReader.Close();
         }

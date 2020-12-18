@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace image_modification.controllers
+﻿namespace image_modification.controllers
 {
     class EdgeDetectionController : IEdgeDetection
     {

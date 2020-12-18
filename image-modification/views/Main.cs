@@ -5,8 +5,6 @@ using image_modification.controllers.classes;
 
 namespace image_modification.views
 {
-
-    
     public partial class Main : Form
     {
         private const int PREVIEW_WIDTH = 400;
@@ -29,13 +27,13 @@ namespace image_modification.views
             ofd.Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg";
             ofd.Filter += "|Bitmap Images(*.bmp)|*.bmp";
 
-            // If image is selected 
+            // If OK is clicked
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 ImageModel image = new ImageModel(ofd.FileName);
-                IImageController ic = new ImageController(image);
+                IImageController imageController = new ImageController(image);
 
-                Bitmap myBitmap = ic.getPreviewImage(PREVIEW_WIDTH).getImage();
+                Bitmap myBitmap = imageController.getPreviewImage(PREVIEW_WIDTH).getImage();
                 previewImage.Image = myBitmap;
             }
         }

@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace image_modification
+﻿namespace image_modification
 {
     interface IImageController
     {

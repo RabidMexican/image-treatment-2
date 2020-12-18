@@ -52,7 +52,7 @@
     <Compile Include="controllers\IEdgeDetection.cs" />
     <Compile Include="controllers\IFilter.cs" />
     <Compile Include="controllers\IImageController.cs" />
-    <Compile Include="models\BitmapImage.cs" />
+    <Compile Include="models\ImageModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="views\Main.cs">
