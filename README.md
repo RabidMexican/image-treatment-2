@@ -14,7 +14,8 @@ The code must have the maximum possible code coverage."
 
 ## Must Have
 * Exceptions 
-* Methods that return void o Methods that return classes
+* Methods that return void
+* Methods that return classes
 
 ## Unit Tests
 Mandatory elements in the unit tests (At least one of each):
