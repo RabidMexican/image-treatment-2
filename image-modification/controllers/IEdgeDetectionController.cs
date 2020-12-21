@@ -2,9 +2,9 @@
 {
     interface IEdgeDetectionController
     {
-        ImageModel EdgeDet1(ImageModel image);
-        ImageModel EdgeDet2(ImageModel image);
-        ImageModel EdgeDet3(ImageModel image);
+        ImageModel ApplyLaplacian3x3(ImageModel image, bool grayscale = false);
+        ImageModel ApplyPrewitt(ImageModel image, bool grayscale = false);
+        ImageModel ApplyKirsch(ImageModel image, bool grayscale = false);
 
     }
 }

@@ -12,9 +12,9 @@ namespace image_modification.views
                     FILTER_RAINBOW = 0,
                     FILTER_SWAP = 1,
                     FILTER_BLACKWHITE = 2,
-                    EDGE_DET_1 = 0,
-                    EDGE_DET_2 = 1,
-                    EDGE_DET_3 = 2;
+                    EDGE_LAPLACIAN_3X3 = 0,
+                    EDGE_PREWITT_3X3 = 1,
+                    EDGE_KIRSCH = 2;
 
         private ImageController imageController;
 
@@ -49,14 +49,16 @@ namespace image_modification.views
 
                 // remove some filters
                 imageController.RemoveFilter(FILTER_BLACKWHITE);
+                imageController.RemoveFilter(FILTER_SWAP);
 
                 // add some edge detections
-                imageController.AddEdgeDetection(EDGE_DET_1);
-                imageController.AddEdgeDetection(EDGE_DET_2);
-                imageController.AddEdgeDetection(EDGE_DET_3);
+                imageController.AddEdgeDetection(EDGE_KIRSCH);
+                imageController.AddEdgeDetection(EDGE_LAPLACIAN_3X3);
+                imageController.AddEdgeDetection(EDGE_PREWITT_3X3);
 
                 // remove some edge detections
-                imageController.RemoveEdgeDetection(EDGE_DET_3);
+                imageController.RemoveEdgeDetection(EDGE_LAPLACIAN_3X3);
+                imageController.RemoveEdgeDetection(EDGE_KIRSCH);
 
                 previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
             }

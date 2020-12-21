@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controllers\classes\ImageMatrix.cs" />
     <Compile Include="controllers\classes\EdgeDetectionController.cs" />
     <Compile Include="controllers\classes\FilterController.cs" />
     <Compile Include="controllers\classes\ImageController.cs" />

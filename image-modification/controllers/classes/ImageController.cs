@@ -18,9 +18,9 @@ namespace image_modification.controllers.classes
             FILTER_RAINBOW = 0, 
             FILTER_SWAP = 1, 
             FILTER_BLACKWHITE = 2,
-            EDGE_DET_1 = 0, 
-            EDGE_DET_2 = 1, 
-            EDGE_DET_3 = 2;
+            EDGE_LAPLACIAN_3X3 = 0,
+            EDGE_PREWITT_3X3 = 1,
+            EDGE_KIRSCH = 2;
 
 
         public ImageController(ImageModel source)
@@ -98,9 +98,9 @@ namespace image_modification.controllers.classes
             {
                 switch (edgeDet)
                 {
-                    case EDGE_DET_1:    result = edgeDetectionController.EdgeDet1(result);    break;
-                    case EDGE_DET_2:    result = edgeDetectionController.EdgeDet2(result);    break;
-                    case EDGE_DET_3:    result = edgeDetectionController.EdgeDet3(result);    break;
+                    case EDGE_LAPLACIAN_3X3:    result = edgeDetectionController.ApplyLaplacian3x3(result);     break;
+                    case EDGE_PREWITT_3X3:      result = edgeDetectionController.ApplyPrewitt(result);          break;
+                    case EDGE_KIRSCH:           result = edgeDetectionController.ApplyKirsch(result);           break;
                 }
             }
             return result;
