@@ -7,17 +7,17 @@
 
 ## Requriements
 ✅ Load an image from the disk  
-✅ Perform 0 to 3 filters and 0 to 3 edge detections 
-⬜️ Save the modified image into a file
+✅ Perform 0 to 3 filters and 0 to 3 edge detections  
+⬜️ Save the modified image into a file  
 
 ## Must Have
-⬜️ Exceptions 
+⬜️ Exceptions  
 ✅ Methods that return void  
-✅ Methods that return classes  
+✅ Methods that return classes   
 
 ## Unit Tests
 Mandatory elements in the unit tests (At least one of each):  
-⬜️ Use Nsubstitute to test the code and substitute interfaces 
+⬜️ Use Nsubstitute to test the code and substitute interfaces  
 ⬜️ Use Nsubstitute to test exceptions  
 ⬜️ Use Nsubstitute to test void methods  
 ⬜️ Use Nsubstitute to test methods that return classes  
