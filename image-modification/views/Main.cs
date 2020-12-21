@@ -8,6 +8,14 @@ namespace image_modification.views
     public partial class Main : Form
     {
         private const int PREVIEW_WIDTH = 400;
+        private const int
+                    FILTER_RAINBOW = 0,
+                    FILTER_SWAP = 1,
+                    FILTER_BLACKWHITE = 2,
+                    EDGE_DET_1 = 0,
+                    EDGE_DET_2 = 1,
+                    EDGE_DET_3 = 2;
+
         private ImageController imageController;
 
         public Main()
@@ -34,20 +42,14 @@ namespace image_modification.views
                 ImageModel image = new ImageModel(ofd.FileName);
                 imageController = new ImageController(image);
 
-                Bitmap myBitmap = imageController.getPreviewImage(PREVIEW_WIDTH).getImage();
+                imageController.AddFilter(FILTER_SWAP);
+                imageController.AddFilter(FILTER_RAINBOW);
 
-                imageController.AddFilter(0);
-                imageController.AddFilter(1);
-                imageController.AddFilter(2);
+                imageController.AddEdgeDetection(EDGE_DET_1);
+                imageController.AddEdgeDetection(EDGE_DET_2);
+                imageController.AddEdgeDetection(EDGE_DET_3);
 
-                imageController.AddEdgeDetection(2);
-                imageController.AddEdgeDetection(1);
-                imageController.AddEdgeDetection(0);
-
-                imageController.applyFilters();
-                imageController.applyEdgeDetection();
-
-                previewImage.Image = myBitmap;
+                previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
             }
         }
     }

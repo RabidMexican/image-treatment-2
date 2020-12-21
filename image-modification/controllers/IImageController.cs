@@ -2,9 +2,8 @@
 {
     interface IImageController
     {
-        ImageModel getPreviewImage(int canvasSize);
-        ImageModel getResultImage();
-        void applyFilters();
-        void applyEdgeDetection();
+        ImageModel GetResultImage(int width);
+        ImageModel ApplyFilters(ImageModel image);
+        ImageModel ApplyEdgeDetection(ImageModel image);
     }
 }

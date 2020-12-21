@@ -23,5 +23,10 @@ namespace image_modification
         {
             return image;
         }
+
+        public void SetImage(Bitmap image)
+        {
+            this.image = image;
+        }
     }
 }

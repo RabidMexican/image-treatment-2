@@ -2,8 +2,8 @@
 {
     interface IFilterController
     {
-        ImageModel Filter1(ImageModel image);
-        ImageModel Filter2(ImageModel image);
-        ImageModel Filter3(ImageModel image);
+        ImageModel ApplyRainbowFilter(ImageModel image);
+        ImageModel ApplySwapFilter(ImageModel image);
+        ImageModel ApplyBlackWhiteFilter(ImageModel image);
     }
 }

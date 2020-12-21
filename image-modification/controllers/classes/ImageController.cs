@@ -15,11 +15,9 @@ namespace image_modification.controllers.classes
         private List<int> edgeDetections = new List<int>();
 
         private const int 
-            FILTER_1 = 0, 
-            FILTER_2 = 1, 
-            FILTER_3 = 2;
-
-        private const int 
+            FILTER_RAINBOW = 0, 
+            FILTER_SWAP = 1, 
+            FILTER_BLACKWHITE = 2,
             EDGE_DET_1 = 0, 
             EDGE_DET_2 = 1, 
             EDGE_DET_3 = 2;
@@ -32,10 +30,27 @@ namespace image_modification.controllers.classes
             edgeDetectionController = new EdgeDetectionController();
         }
 
-        // Returns the full quality image
-        public ImageModel getResultImage()
+        // Returns the modified full quality image
+        public ImageModel GetResultImage()
         {
-            return image;
+            ImageModel result = image;
+            result = ApplyFilters(result);
+            result = ApplyEdgeDetection(result);
+            return result;
+        }
+
+        // Gets result with filters
+        public ImageModel GetResultImage(int canvasWidth = 0)
+        {
+            ImageModel result;
+
+            // if canvas is set we generate a preview image
+            if (canvasWidth > 0) result = CreatePreviewImage(canvasWidth);
+            else result = image;
+
+            result = ApplyFilters(result);
+            result = ApplyEdgeDetection(result);
+            return result;
         }
 
         // Add a filter to the list
@@ -51,39 +66,38 @@ namespace image_modification.controllers.classes
         }
 
         // Applys all filters in order
-        public void applyFilters()
+        public ImageModel ApplyFilters(ImageModel result)
         {
             foreach(int filter in filters)
             {
                 switch(filter)
                 {
-                    case FILTER_1:      image = filterController.Filter1(image);    break;
-                    case FILTER_2:      image = filterController.Filter2(image);    break;
-                    case FILTER_3:      image = filterController.Filter3(image);    break;
-                    default:            return;
+                    case FILTER_RAINBOW:        result = filterController.ApplyRainbowFilter(result);       break;
+                    case FILTER_SWAP:           result = filterController.ApplySwapFilter(result);          break;
+                    case FILTER_BLACKWHITE:     result = filterController.ApplyBlackWhiteFilter(result);    break;
 
                 }
             }
+            return result;
         }
         
         // Applys all edge detections in order
-        public void applyEdgeDetection()
+        public ImageModel ApplyEdgeDetection(ImageModel result)
         {
             foreach (int edgeDet in edgeDetections)
             {
                 switch (edgeDet)
                 {
-                    case EDGE_DET_1:    image = edgeDetectionController.EdgeDet1(image);    break;
-                    case EDGE_DET_2:    image = edgeDetectionController.EdgeDet2(image);    break;
-                    case EDGE_DET_3:    image = edgeDetectionController.EdgeDet3(image);    break;
-                    default: return;
-
+                    case EDGE_DET_1:    result = edgeDetectionController.EdgeDet1(result);    break;
+                    case EDGE_DET_2:    result = edgeDetectionController.EdgeDet2(result);    break;
+                    case EDGE_DET_3:    result = edgeDetectionController.EdgeDet3(result);    break;
                 }
             }
+            return result;
         }
 
         // Creates a square bitmap for displaying in the app
-        public ImageModel getPreviewImage(int width)
+        public ImageModel CreatePreviewImage(int width)
         {
             // TODO : replace this with something better?
             float ratio = 1.0f;
