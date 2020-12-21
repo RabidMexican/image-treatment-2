@@ -6,21 +6,21 @@
 "Create a new application based on your previous projects. We want a program that does 0 to 3 filters and 0 to 3 edge detections. The code must have the maximum possible code coverage."
 
 ## Requriements
-[x] Load an image from the disk 
-[x] Perform 0 to 3 filters and 0 to 3 edge detections 
-[ ] Save the modified image into a file
+- [x] Load an image from the disk 
+- [x] Perform 0 to 3 filters and 0 to 3 edge detections 
+- [ ] Save the modified image into a file
 
 ## Must Have
-[ ] Exceptions 
-[x] Methods that return void
-[x] Methods that return classes
+- [ ] Exceptions 
+- [x] Methods that return void
+- [x] Methods that return classes
 
 ## Unit Tests
 Mandatory elements in the unit tests (At least one of each):
-[ ] Use Nsubstitute to test the code and substitute interfaces
-[ ] Use Nsubstitute to test exceptions
-[ ] Use Nsubstitute to test void methods
-[ ] Use Nsubstitute to test methods that return classes
-[ ] Cover 100% of the business layer code (inside interfaces)
-[ ] Short unit tests doing one thing at a time with explicit names
+- [ ] Use Nsubstitute to test the code and substitute interfaces
+- [ ] Use Nsubstitute to test exceptions
+- [ ] Use Nsubstitute to test void methods
+- [ ] Use Nsubstitute to test methods that return classes
+- [ ] Cover 100% of the business layer code (inside interfaces)
+- [ ] Short unit tests doing one thing at a time with explicit names
 
