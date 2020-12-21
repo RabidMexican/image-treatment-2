@@ -42,12 +42,21 @@ namespace image_modification.views
                 ImageModel image = new ImageModel(ofd.FileName);
                 imageController = new ImageController(image);
 
+                // add some filters
                 imageController.AddFilter(FILTER_SWAP);
                 imageController.AddFilter(FILTER_RAINBOW);
+                imageController.AddFilter(FILTER_BLACKWHITE);
 
+                // remove some filters
+                imageController.RemoveFilter(FILTER_BLACKWHITE);
+
+                // add some edge detections
                 imageController.AddEdgeDetection(EDGE_DET_1);
                 imageController.AddEdgeDetection(EDGE_DET_2);
                 imageController.AddEdgeDetection(EDGE_DET_3);
+
+                // remove some edge detections
+                imageController.RemoveEdgeDetection(EDGE_DET_3);
 
                 previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
             }

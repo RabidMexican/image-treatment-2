@@ -30,15 +30,6 @@ namespace image_modification.controllers.classes
             edgeDetectionController = new EdgeDetectionController();
         }
 
-        // Returns the modified full quality image
-        public ImageModel GetResultImage()
-        {
-            ImageModel result = image;
-            result = ApplyFilters(result);
-            result = ApplyEdgeDetection(result);
-            return result;
-        }
-
         // Gets result with filters
         public ImageModel GetResultImage(int canvasWidth = 0)
         {
@@ -57,12 +48,31 @@ namespace image_modification.controllers.classes
         public void AddFilter(int filter)
         {
             filters.Add(filter);
+
+        }
+
+        // Remove a specific filter from the list
+        public void RemoveFilter(int filter)
+        {
+            for(int i = 0; i < filters.Count; i++)
+            {
+                if (filters[i] == filter) filters.RemoveAt(i);
+            }
         }
 
         // Add an edge detection to the list
         public void AddEdgeDetection(int edgeDet)
         {
             edgeDetections.Add(edgeDet);
+        }
+
+        // Remove a specific edge detection from the list
+        public void RemoveEdgeDetection(int edgeDet)
+        {
+            for (int i = 0; i < edgeDetections.Count; i++)
+            {
+                if (edgeDetections[i] == edgeDet) edgeDetections.RemoveAt(i);
+            }
         }
 
         // Applys all filters in order
