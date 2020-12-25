@@ -105,7 +105,6 @@ namespace image_modification.views
             this.panelLoadImage.Name = "panelLoadImage";
             this.panelLoadImage.Size = new System.Drawing.Size(1407, 775);
             this.panelLoadImage.TabIndex = 3;
-            this.panelLoadImage.Paint += new System.Windows.Forms.PaintEventHandler(this.panelLoadImage_Paint);
             // 
             // labelStep1
             // 
@@ -210,7 +209,6 @@ namespace image_modification.views
             this.panelEdgeDetections.Name = "panelEdgeDetections";
             this.panelEdgeDetections.Size = new System.Drawing.Size(341, 161);
             this.panelEdgeDetections.TabIndex = 5;
-            this.panelEdgeDetections.Paint += new System.Windows.Forms.PaintEventHandler(this.panelEdgeDetections_Paint);
             // 
             // checkBoxEdgePrewitt
             // 
@@ -223,7 +221,7 @@ namespace image_modification.views
             this.checkBoxEdgePrewitt.TabIndex = 9;
             this.checkBoxEdgePrewitt.Text = "Edge Prewitt 3x3";
             this.checkBoxEdgePrewitt.UseVisualStyleBackColor = true;
-            this.checkBoxEdgePrewitt.CheckedChanged += new System.EventHandler(this.checkBoxEdgePrewitt_CheckedChanged);
+            this.checkBoxEdgePrewitt.CheckedChanged += new System.EventHandler(this.TogglePrewitt);
             // 
             // checkBoxEdgeLaplacian
             // 
@@ -236,7 +234,7 @@ namespace image_modification.views
             this.checkBoxEdgeLaplacian.TabIndex = 8;
             this.checkBoxEdgeLaplacian.Text = "Edge Laplacian 3x3";
             this.checkBoxEdgeLaplacian.UseVisualStyleBackColor = true;
-            this.checkBoxEdgeLaplacian.CheckedChanged += new System.EventHandler(this.checkBoxEdgeLaplacian_CheckedChanged);
+            this.checkBoxEdgeLaplacian.CheckedChanged += new System.EventHandler(this.ToggleLaplacian3x3);
             // 
             // checkBoxEdgeKirsh
             // 
@@ -250,7 +248,7 @@ namespace image_modification.views
             this.checkBoxEdgeKirsh.Text = "Edge Kirsch";
             this.checkBoxEdgeKirsh.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkBoxEdgeKirsh.UseVisualStyleBackColor = true;
-            this.checkBoxEdgeKirsh.CheckedChanged += new System.EventHandler(this.checkBoxEdgeKirsh_CheckedChanged);
+            this.checkBoxEdgeKirsh.CheckedChanged += new System.EventHandler(this.ToggleKirsch);
             // 
             // labelEdgeDetections
             // 
@@ -290,7 +288,7 @@ namespace image_modification.views
             this.checkboxFiltersDone.TabIndex = 9;
             this.checkboxFiltersDone.Text = "Validate";
             this.checkboxFiltersDone.UseVisualStyleBackColor = true;
-            this.checkboxFiltersDone.CheckedChanged += new System.EventHandler(this.checkboxFiltersDone_CheckedChanged);
+            this.checkboxFiltersDone.CheckedChanged += new System.EventHandler(this.ValidateFilters);
             // 
             // checkboxBlackWhiteFilter
             // 
@@ -303,7 +301,7 @@ namespace image_modification.views
             this.checkboxBlackWhiteFilter.TabIndex = 8;
             this.checkboxBlackWhiteFilter.Text = "Black and White filter";
             this.checkboxBlackWhiteFilter.UseVisualStyleBackColor = true;
-            this.checkboxBlackWhiteFilter.CheckedChanged += new System.EventHandler(this.checkboxBlackWhiteFilter_CheckedChanged);
+            this.checkboxBlackWhiteFilter.CheckedChanged += new System.EventHandler(this.ToggleBlackWhiteFilter);
             // 
             // checkboxSwapFilter
             // 
@@ -316,7 +314,7 @@ namespace image_modification.views
             this.checkboxSwapFilter.TabIndex = 7;
             this.checkboxSwapFilter.Text = "Swap filter";
             this.checkboxSwapFilter.UseVisualStyleBackColor = true;
-            this.checkboxSwapFilter.CheckedChanged += new System.EventHandler(this.checkboxSwapFilter_CheckedChanged);
+            this.checkboxSwapFilter.CheckedChanged += new System.EventHandler(this.ToggleSwapFilter);
             // 
             // checkboxRainbowFilter
             // 
@@ -330,7 +328,7 @@ namespace image_modification.views
             this.checkboxRainbowFilter.Text = "Rainbow filter";
             this.checkboxRainbowFilter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkboxRainbowFilter.UseVisualStyleBackColor = true;
-            this.checkboxRainbowFilter.CheckedChanged += new System.EventHandler(this.checkboxRainbowFilter_CheckedChanged);
+            this.checkboxRainbowFilter.CheckedChanged += new System.EventHandler(this.ToggleRainbowFilter);
             // 
             // labelFilters
             // 

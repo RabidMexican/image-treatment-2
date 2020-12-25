@@ -21,8 +21,8 @@ namespace image_modification.views
         public Main()
         {
             InitializeComponent();
-            changeEnabledEdgeDetections(false);
-            changeEnabledFilters(false);
+            ToggleEdgeDetections(false);
+            ToggleFilters(false);
             buttonSave.Enabled = false;
             checkboxFiltersDone.Enabled = false;
         }
@@ -31,90 +31,36 @@ namespace image_modification.views
         {
             // Executes first, as soon as form is ready
         }
-
-
-        // Display the two main label
-
-
-        private void panelEdgeDetections_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panelLoadImage_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        //
-        // Edge Detections
-        //
+        
+        // EDGE DETECTIONS
 
         //add or remove the edge detection Kirsh
-        private void checkBoxEdgeKirsh_CheckedChanged(object sender, EventArgs e)
+        private void ToggleKirsch(object sender, EventArgs e)
         {
-
-            if (checkBoxEdgeKirsh.Checked)
-            {
-                imageController.AddEdgeDetection(EDGE_KIRSCH);
-                previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
-            }
-            else
-            {
-                imageController.RemoveEdgeDetection(EDGE_KIRSCH);
-                previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
-            }
+            if (checkBoxEdgeKirsh.Checked) imageController.AddEdgeDetection(EDGE_KIRSCH);
+            else imageController.RemoveEdgeDetection(EDGE_KIRSCH);
+            UpdatePreviewImage();
         }
 
-        //add or remove the edge detection Laplacian 3x3
-        private void checkBoxEdgeLaplacian_CheckedChanged(object sender, EventArgs e)
+        // Toggle Laplacian 3x3
+        private void ToggleLaplacian3x3(object sender, EventArgs e)
         {
-
-            if (checkBoxEdgeLaplacian.Checked)
-            {
-                imageController.AddEdgeDetection(EDGE_LAPLACIAN_3X3);
-                previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
-            }
-            else
-            {
-                imageController.RemoveEdgeDetection(EDGE_LAPLACIAN_3X3);
-                previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
-            }
-
+            if (checkBoxEdgeLaplacian.Checked) imageController.AddEdgeDetection(EDGE_LAPLACIAN_3X3);
+            else imageController.RemoveEdgeDetection(EDGE_LAPLACIAN_3X3);
+            UpdatePreviewImage();
         }
 
         //add or remove the edge detection Prewitt 3x3
-        private void checkBoxEdgePrewitt_CheckedChanged(object sender, EventArgs e)
+        private void TogglePrewitt(object sender, EventArgs e)
         {
-
-            if (checkBoxEdgePrewitt.Checked)
-            {
-                imageController.AddEdgeDetection(EDGE_PREWITT_3X3);
-                previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
-            }
-            else
-            {
-                imageController.RemoveEdgeDetection(EDGE_PREWITT_3X3);
-                previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
-            }
+            if (checkBoxEdgePrewitt.Checked) imageController.AddEdgeDetection(EDGE_PREWITT_3X3);
+            else imageController.RemoveEdgeDetection(EDGE_PREWITT_3X3);
+            UpdatePreviewImage();
         }
 
-        //
-        // Disabled/Enabled edge detections
-        //
-        private void changeEnabledEdgeDetections(bool status)
+        // Reset all edge detections
+        private void ResetEdgeDetections()
         {
-            checkBoxEdgeKirsh.Enabled = status;
-            checkBoxEdgeLaplacian.Enabled = status;
-            checkBoxEdgePrewitt.Enabled = status;
-
-        }
-
-
-        // Reset all edge detections panel actions
-        private void resetEdgeDetections()
-        {
-
             imageController.RemoveEdgeDetection(EDGE_PREWITT_3X3);
             imageController.RemoveEdgeDetection(EDGE_LAPLACIAN_3X3);
             imageController.RemoveEdgeDetection(EDGE_KIRSCH);
@@ -123,66 +69,49 @@ namespace image_modification.views
             checkBoxEdgePrewitt.Checked = false;
         }
 
-        //
-        // Filters
-        //
-
-        //add or remove the filter black and white
-        private void checkboxBlackWhiteFilter_CheckedChanged(object sender, EventArgs e)
+        // Toggle all edge detections
+        private void ToggleEdgeDetections(bool status)
         {
-
-            if (checkboxBlackWhiteFilter.Checked)
-            {
-                imageController.AddFilter(FILTER_BLACKWHITE);
-                previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
-            }
-            else
-            {
-                imageController.RemoveFilter(FILTER_BLACKWHITE);
-                previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
-            }
-
+            checkBoxEdgeKirsh.Enabled = status;
+            checkBoxEdgeLaplacian.Enabled = status;
+            checkBoxEdgePrewitt.Enabled = status;
         }
 
-        //add or remove the filter rainbow
-        private void checkboxRainbowFilter_CheckedChanged(object sender, EventArgs e)
+        // FILTERS
+
+        // Toggle Black & White filter
+        private void ToggleBlackWhiteFilter(object sender, EventArgs e)
         {
-            if (checkboxRainbowFilter.Checked)
-            {
-                imageController.AddFilter(FILTER_RAINBOW);
-                previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
-            }
-            else
-            {
-                imageController.RemoveFilter(FILTER_RAINBOW);
-                previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
-            }
+            if (checkboxBlackWhiteFilter.Checked) imageController.AddFilter(FILTER_BLACKWHITE);
+            else imageController.RemoveFilter(FILTER_BLACKWHITE);
+            UpdatePreviewImage();
         }
 
-        //add or remove the filter swap
-        private void checkboxSwapFilter_CheckedChanged(object sender, EventArgs e)
+        // Toggle Rainbow filter
+        private void ToggleRainbowFilter(object sender, EventArgs e)
         {
-
-            if (checkboxSwapFilter.Checked)
-            {
-                imageController.AddFilter(FILTER_SWAP);
-                previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
-            }
-            else
-            {
-                imageController.RemoveFilter(FILTER_SWAP);
-                previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
-            }
+            if (checkboxRainbowFilter.Checked) imageController.AddFilter(FILTER_RAINBOW);
+            else imageController.RemoveFilter(FILTER_RAINBOW);
+            UpdatePreviewImage();
         }
 
-
-
-
-
-        // Reset all filters panel actions
-        private void resetFilters()
+        // Toggle Swap filter
+        private void ToggleSwapFilter(object sender, EventArgs e)
         {
+            if (checkboxSwapFilter.Checked) imageController.AddFilter(FILTER_SWAP);
+            else imageController.RemoveFilter(FILTER_SWAP);
+            UpdatePreviewImage();
+        }
 
+        // Upates the preview image
+        private void UpdatePreviewImage()
+        {
+            previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
+        }
+
+        // Reset all filters
+        private void ResetFilters()
+        {
             imageController.RemoveFilter(FILTER_SWAP);
             imageController.RemoveFilter(FILTER_RAINBOW);
             imageController.RemoveFilter(FILTER_BLACKWHITE);
@@ -190,43 +119,33 @@ namespace image_modification.views
             checkboxRainbowFilter.Checked = false;
             checkboxBlackWhiteFilter.Checked = false;
             checkboxFiltersDone.Checked = false;
-
         }
 
-        // Disabled/Enabled the filters
-        private void changeEnabledFilters(bool status)
+        // Toggle all filters
+        private void ToggleFilters(bool status)
         {
             checkboxRainbowFilter.Enabled = status;
             checkboxBlackWhiteFilter.Enabled = status;
             checkboxSwapFilter.Enabled = status;
-
         }
-        //
+
         // Validate the filters
-        //yes -> we can add edge detections but no more filters
-        //false -> we can add filters but reset edge detection
-        //
-        private void checkboxFiltersDone_CheckedChanged(object sender, EventArgs e)
+        private void ValidateFilters(object sender, EventArgs e)
         {
             if (checkboxFiltersDone.Checked)
             {
-                changeEnabledFilters(false);
-                changeEnabledEdgeDetections(true);
-
-
+                ToggleFilters(false);
+                ToggleEdgeDetections(true);
             }
             else
             {
-                changeEnabledFilters(true);
-                changeEnabledEdgeDetections(false);
-                resetEdgeDetections();
+                ToggleFilters(true);
+                ToggleEdgeDetections(false);
+                ResetEdgeDetections();
             }
-            previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
+            UpdatePreviewImage();
         }
 
-
-
-        
         // Button to save the new image
         private void OnbuttonSave_Click(object sender, EventArgs e)
         {
@@ -248,14 +167,13 @@ namespace image_modification.views
                 ImageModel image = new ImageModel(ofd.FileName);
                 imageController = new ImageController(image);
 
-                
-                resetFilters();
-                resetEdgeDetections();
-
-                previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
+                // Reset filters and update image
+                ResetFilters();
+                ResetEdgeDetections();
+                UpdatePreviewImage();
 
                 //if image correctly loaded we can add filters or save the new picture
-                changeEnabledFilters(true);
+                ToggleFilters(true);
                 buttonSave.Enabled = true;
                 checkboxFiltersDone.Enabled = true;
 
