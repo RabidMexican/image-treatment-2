@@ -7,7 +7,7 @@ namespace image_modification.views
 {
     public partial class Main : Form
     {
-        private const int PREVIEW_WIDTH = 400;
+        private const int PREVIEW_WIDTH = 450;
         private const int
                     FILTER_RAINBOW = 0,
                     FILTER_SWAP = 1,
@@ -176,9 +176,6 @@ namespace image_modification.views
                 ToggleFilters(true);
                 buttonSave.Enabled = true;
                 checkboxFiltersDone.Enabled = true;
-
-
-
             }
         }
     }
