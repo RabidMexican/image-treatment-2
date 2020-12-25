@@ -61,11 +61,12 @@ namespace image_modification.views
             // 
             // previewImage
             // 
-            this.previewImage.BackColor = System.Drawing.Color.Transparent;
+            this.previewImage.BackColor = System.Drawing.Color.White;
             this.previewImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.previewImage.Location = new System.Drawing.Point(58, 34);
             this.previewImage.Name = "previewImage";
             this.previewImage.Size = new System.Drawing.Size(450, 488);
+            this.previewImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.previewImage.TabIndex = 1;
             this.previewImage.TabStop = false;
             // 
@@ -100,7 +101,7 @@ namespace image_modification.views
             this.panelLoadImage.Controls.Add(this.buttonLoad);
             this.panelLoadImage.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLoadImage.Location = new System.Drawing.Point(0, 0);
-            this.panelLoadImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelLoadImage.Margin = new System.Windows.Forms.Padding(2);
             this.panelLoadImage.Name = "panelLoadImage";
             this.panelLoadImage.Size = new System.Drawing.Size(1055, 630);
             this.panelLoadImage.TabIndex = 3;
@@ -130,7 +131,7 @@ namespace image_modification.views
             this.panelDesignImage.Controls.Add(this.buttonSave);
             this.panelDesignImage.Controls.Add(this.panelFilters);
             this.panelDesignImage.Location = new System.Drawing.Point(575, 0);
-            this.panelDesignImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelDesignImage.Margin = new System.Windows.Forms.Padding(2);
             this.panelDesignImage.Name = "panelDesignImage";
             this.panelDesignImage.Size = new System.Drawing.Size(355, 630);
             this.panelDesignImage.TabIndex = 4;
@@ -161,8 +162,8 @@ namespace image_modification.views
             this.labelTipps.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTipps.Location = new System.Drawing.Point(12, 20);
             this.labelTipps.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelTipps.Name = "labelTips";
-            this.labelTipps.Size = new System.Drawing.Size(58, 17);
+            this.labelTipps.Name = "labelTipps";
+            this.labelTipps.Size = new System.Drawing.Size(49, 17);
             this.labelTipps.TabIndex = 9;
             this.labelTipps.Text = "Tips :";
             // 
@@ -213,7 +214,7 @@ namespace image_modification.views
             this.panelEdgeDetections.Controls.Add(this.checkBoxEdgeKirsh);
             this.panelEdgeDetections.Controls.Add(this.labelEdgeDetections);
             this.panelEdgeDetections.Location = new System.Drawing.Point(50, 335);
-            this.panelEdgeDetections.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelEdgeDetections.Margin = new System.Windows.Forms.Padding(2);
             this.panelEdgeDetections.Name = "panelEdgeDetections";
             this.panelEdgeDetections.Size = new System.Drawing.Size(256, 131);
             this.panelEdgeDetections.TabIndex = 5;
@@ -224,7 +225,7 @@ namespace image_modification.views
             this.checkBoxEdgePrewitt.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxEdgePrewitt.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.checkBoxEdgePrewitt.Location = new System.Drawing.Point(56, 95);
-            this.checkBoxEdgePrewitt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxEdgePrewitt.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxEdgePrewitt.Name = "checkBoxEdgePrewitt";
             this.checkBoxEdgePrewitt.Size = new System.Drawing.Size(132, 21);
             this.checkBoxEdgePrewitt.TabIndex = 9;
@@ -238,7 +239,7 @@ namespace image_modification.views
             this.checkBoxEdgeLaplacian.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxEdgeLaplacian.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.checkBoxEdgeLaplacian.Location = new System.Drawing.Point(56, 71);
-            this.checkBoxEdgeLaplacian.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxEdgeLaplacian.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxEdgeLaplacian.Name = "checkBoxEdgeLaplacian";
             this.checkBoxEdgeLaplacian.Size = new System.Drawing.Size(151, 21);
             this.checkBoxEdgeLaplacian.TabIndex = 8;
@@ -252,7 +253,7 @@ namespace image_modification.views
             this.checkBoxEdgeKirsh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxEdgeKirsh.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.checkBoxEdgeKirsh.Location = new System.Drawing.Point(56, 46);
-            this.checkBoxEdgeKirsh.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxEdgeKirsh.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxEdgeKirsh.Name = "checkBoxEdgeKirsh";
             this.checkBoxEdgeKirsh.Size = new System.Drawing.Size(103, 21);
             this.checkBoxEdgeKirsh.TabIndex = 7;
@@ -285,7 +286,7 @@ namespace image_modification.views
             this.panelFilters.Controls.Add(this.checkboxRainbowFilter);
             this.panelFilters.Controls.Add(this.labelFilters);
             this.panelFilters.Location = new System.Drawing.Point(50, 112);
-            this.panelFilters.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelFilters.Margin = new System.Windows.Forms.Padding(2);
             this.panelFilters.Name = "panelFilters";
             this.panelFilters.Size = new System.Drawing.Size(256, 152);
             this.panelFilters.TabIndex = 4;
@@ -296,7 +297,7 @@ namespace image_modification.views
             this.checkboxFiltersDone.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkboxFiltersDone.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.checkboxFiltersDone.Location = new System.Drawing.Point(10, 128);
-            this.checkboxFiltersDone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkboxFiltersDone.Margin = new System.Windows.Forms.Padding(2);
             this.checkboxFiltersDone.Name = "checkboxFiltersDone";
             this.checkboxFiltersDone.Size = new System.Drawing.Size(78, 21);
             this.checkboxFiltersDone.TabIndex = 9;
@@ -310,7 +311,7 @@ namespace image_modification.views
             this.checkboxBlackWhiteFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkboxBlackWhiteFilter.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.checkboxBlackWhiteFilter.Location = new System.Drawing.Point(56, 90);
-            this.checkboxBlackWhiteFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkboxBlackWhiteFilter.Margin = new System.Windows.Forms.Padding(2);
             this.checkboxBlackWhiteFilter.Name = "checkboxBlackWhiteFilter";
             this.checkboxBlackWhiteFilter.Size = new System.Drawing.Size(160, 21);
             this.checkboxBlackWhiteFilter.TabIndex = 8;
@@ -324,7 +325,7 @@ namespace image_modification.views
             this.checkboxSwapFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkboxSwapFilter.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.checkboxSwapFilter.Location = new System.Drawing.Point(56, 66);
-            this.checkboxSwapFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkboxSwapFilter.Margin = new System.Windows.Forms.Padding(2);
             this.checkboxSwapFilter.Name = "checkboxSwapFilter";
             this.checkboxSwapFilter.Size = new System.Drawing.Size(92, 21);
             this.checkboxSwapFilter.TabIndex = 7;
@@ -338,7 +339,7 @@ namespace image_modification.views
             this.checkboxRainbowFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkboxRainbowFilter.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.checkboxRainbowFilter.Location = new System.Drawing.Point(56, 41);
-            this.checkboxRainbowFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkboxRainbowFilter.Margin = new System.Windows.Forms.Padding(2);
             this.checkboxRainbowFilter.Name = "checkboxRainbowFilter";
             this.checkboxRainbowFilter.Size = new System.Drawing.Size(112, 21);
             this.checkboxRainbowFilter.TabIndex = 6;

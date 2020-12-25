@@ -12,7 +12,6 @@ namespace image_modification.controllers
     {
         public ImageModel ApplyLaplacian3x3(ImageModel sourceBitmap, bool grayscale = false)
         {
-            Console.WriteLine("\n\tPERFORMING LAPLACIAN 3x3");
             return ConvolutionFilter(
                 sourceBitmap, 
                 ImageMatrix.Laplacian3x3,
@@ -21,7 +20,6 @@ namespace image_modification.controllers
 
         public ImageModel ApplyPrewitt(ImageModel image, bool grayscale = false)
         {
-            Console.WriteLine("\n\tPERFORMING PREWITT 3x3");
             return ConvolutionFilter(
                 image,
                 ImageMatrix.Prewitt3x3Horizontal,
@@ -31,7 +29,6 @@ namespace image_modification.controllers
 
         public ImageModel ApplyKirsch(ImageModel image, bool grayscale)
         {
-            Console.WriteLine("\n\tPERFORMING KIRSCH");
             return ConvolutionFilter(
                 image,
                 ImageMatrix.Kirsch3x3Horizontal,
