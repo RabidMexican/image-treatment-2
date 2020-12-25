@@ -8,7 +8,7 @@
 ## Requirements
 ✅ Load an image from the disk  
 ✅ Perform 0 to 3 filters and 0 to 3 edge detections  
-⬜️ Save the modified image into a file  
+✅ Save the modified image into a file  
 
 ## Must Have
 ⬜️ Exceptions  
