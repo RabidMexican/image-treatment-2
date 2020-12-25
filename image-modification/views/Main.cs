@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Windows.Forms;
 using image_modification.controllers.classes;
 
@@ -149,7 +151,36 @@ namespace image_modification.views
         // Button to save the new image
         private void OnbuttonSave_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("STARTING SAVE");
+            // Get full size bitmap
+            Bitmap image = imageController.GetResultImage().getImage();
 
+            if (image != null)
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Title = "Specify a file name and file path";
+                sfd.Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg";
+                sfd.Filter += "|Bitmap Images(*.bmp)|*.bmp";
+
+                // If OK is clicked
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    string fileExtension = Path.GetExtension(sfd.FileName).ToUpper();
+                    ImageFormat imgFormat = ImageFormat.Png;
+
+                    // Check for file extension
+                    switch(fileExtension)
+                    {
+                        case "BMP": imgFormat = ImageFormat.Bmp; break;
+                        case "JPG": imgFormat = ImageFormat.Jpeg; break;
+                    }
+
+                    StreamWriter streamWriter = new StreamWriter(sfd.FileName, false);
+                    image.Save(streamWriter.BaseStream, imgFormat);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+            }
         }
  
         // Button to load an image for treatment
