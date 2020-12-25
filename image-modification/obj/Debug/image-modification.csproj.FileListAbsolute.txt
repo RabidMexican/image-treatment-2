@@ -8,3 +8,13 @@ C:\Users\benpo\git\image-modification\image-modification\obj\Debug\image-modific
 C:\Users\benpo\git\image-modification\image-modification\obj\Debug\image-modification.exe
 C:\Users\benpo\git\image-modification\image-modification\obj\Debug\image-modification.pdb
 C:\Users\benpo\git\image-modification\image-modification\obj\Debug\image_modification.views.Main.resources
+C:\Users\Victo\source\repos\image-treatment-2\image-modification\bin\Debug\image-modification.exe.config
+C:\Users\Victo\source\repos\image-treatment-2\image-modification\bin\Debug\image-modification.exe
+C:\Users\Victo\source\repos\image-treatment-2\image-modification\bin\Debug\image-modification.pdb
+C:\Users\Victo\source\repos\image-treatment-2\image-modification\obj\Debug\image-modification.csprojAssemblyReference.cache
+C:\Users\Victo\source\repos\image-treatment-2\image-modification\obj\Debug\image_modification.Properties.Resources.resources
+C:\Users\Victo\source\repos\image-treatment-2\image-modification\obj\Debug\image_modification.views.Main.resources
+C:\Users\Victo\source\repos\image-treatment-2\image-modification\obj\Debug\image-modification.csproj.GenerateResource.cache
+C:\Users\Victo\source\repos\image-treatment-2\image-modification\obj\Debug\image-modification.csproj.CoreCompileInputs.cache
+C:\Users\Victo\source\repos\image-treatment-2\image-modification\obj\Debug\image-modification.exe
+C:\Users\Victo\source\repos\image-treatment-2\image-modification\obj\Debug\image-modification.pdb
