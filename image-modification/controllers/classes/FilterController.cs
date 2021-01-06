@@ -8,7 +8,7 @@ namespace image_modification.controllers
         // Apply the rainbow filter
         public ImageModel ApplyRainbowFilter(ImageModel image)
         {
-            Bitmap bmp = image.getImage();
+            Bitmap bmp = image.GetBitmapImage();
             Bitmap result = new Bitmap(bmp.Width, bmp.Height);
             int raz = bmp.Height / 4;
 
@@ -46,7 +46,7 @@ namespace image_modification.controllers
         public ImageModel ApplySwapFilter(ImageModel image)
         {
             Color c;
-            Bitmap bmp = image.getImage();
+            Bitmap bmp = image.GetBitmapImage();
 
             for (int i = 0; i < bmp.Width; i++)
                 for (int x = 0; x < bmp.Height; x++)
@@ -61,7 +61,7 @@ namespace image_modification.controllers
 
         public ImageModel ApplyBlackWhiteFilter(ImageModel image)
         {
-            Bitmap bmp = image.getImage();
+            Bitmap bmp = image.GetBitmapImage();
             int rgb;
             Color c;
 

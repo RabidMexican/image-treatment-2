@@ -18,7 +18,7 @@ namespace image_modification.views
                     EDGE_PREWITT_3X3 = 1,
                     EDGE_KIRSCH = 2;
 
-        private ImageController imageController;
+        private ImageController imageController = new ImageController();
 
         public Main()
         {
@@ -66,6 +66,7 @@ namespace image_modification.views
             imageController.RemoveEdgeDetection(EDGE_PREWITT_3X3);
             imageController.RemoveEdgeDetection(EDGE_LAPLACIAN_3X3);
             imageController.RemoveEdgeDetection(EDGE_KIRSCH);
+
             checkBoxEdgeKirsh.Checked = false;
             checkBoxEdgeLaplacian.Checked = false;
             checkBoxEdgePrewitt.Checked = false;
@@ -108,7 +109,7 @@ namespace image_modification.views
         // Upates the preview image
         private void UpdatePreviewImage()
         {
-            previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).getImage();
+            previewImage.Image = imageController.GetResultImage(PREVIEW_WIDTH).GetBitmapImage();
         }
 
         // Reset all filters
@@ -151,53 +152,17 @@ namespace image_modification.views
         // Button to save the new image
         private void OnbuttonSave_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("STARTING SAVE");
-            // Get full size bitmap
-            Bitmap image = imageController.GetResultImage().getImage();
-
-            if (image != null)
-            {
-                SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Title = "Specify a file name and file path";
-                sfd.Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg";
-                sfd.Filter += "|Bitmap Images(*.bmp)|*.bmp";
-
-                // If OK is clicked
-                if (sfd.ShowDialog() == DialogResult.OK)
-                {
-                    string fileExtension = Path.GetExtension(sfd.FileName).ToUpper();
-                    ImageFormat imgFormat = ImageFormat.Png;
-
-                    // Check for file extension
-                    switch(fileExtension)
-                    {
-                        case "BMP": imgFormat = ImageFormat.Bmp; break;
-                        case "JPG": imgFormat = ImageFormat.Jpeg; break;
-                    }
-
-                    StreamWriter streamWriter = new StreamWriter(sfd.FileName, false);
-                    image.Save(streamWriter.BaseStream, imgFormat);
-                    streamWriter.Flush();
-                    streamWriter.Close();
-                }
-            }
+            imageController.SaveImage();
         }
  
         // Button to load an image for treatment
         private void OnButtonLoadClick(object sender, EventArgs e)
         {
-            // Create and define parameters for image interface 
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = "Select an image file";
-            ofd.Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg";
-            ofd.Filter += "|Bitmap Images(*.bmp)|*.bmp";
+            // Loads an image from the image controller
+            bool imageLoaded = imageController.LoadImage();
 
-            // If OK is clicked
-            if (ofd.ShowDialog() == DialogResult.OK)
+            if(imageLoaded)
             {
-                ImageModel image = new ImageModel(ofd.FileName);
-                imageController = new ImageController(image);
-
                 // Reset filters and update image
                 ResetFilters();
                 ResetEdgeDetections();

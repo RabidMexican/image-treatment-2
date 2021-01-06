@@ -19,7 +19,7 @@ namespace image_modification
             image = source;
         }
 
-        public Bitmap getImage()
+        public Bitmap GetBitmapImage()
         {
             return image;
         }

@@ -24,7 +24,7 @@ namespace image_modification.controllers
                 image,
                 ImageMatrix.Prewitt3x3Horizontal,
                 ImageMatrix.Prewitt3x3Vertical,
-                1.0, 0, grayscale);
+                grayscale);
         }
 
         public ImageModel ApplyKirsch(ImageModel image, bool grayscale)
@@ -33,7 +33,7 @@ namespace image_modification.controllers
                 image,
                 ImageMatrix.Kirsch3x3Horizontal,
                 ImageMatrix.Kirsch3x3Vertical,
-                1.0, 0, grayscale);
+                grayscale);
         }
 
         private ImageModel ConvolutionFilter(
@@ -43,7 +43,7 @@ namespace image_modification.controllers
             int bias = 0,
             bool grayscale = false)
         {
-            Bitmap sourceBitmap = source.getImage();
+            Bitmap sourceBitmap = source.GetBitmapImage();
             BitmapData sourceData = sourceBitmap.LockBits(
                 new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height),
                 ImageLockMode.ReadOnly,
@@ -96,13 +96,13 @@ namespace image_modification.controllers
                             red += pixelBuffer[calcOffset + 2] * filterMatrix[filterY + filterOffset, filterX + filterOffset];
                         }
 
-                    blue = factor * blue + bias;
-                    green = factor * green + bias;
-                    red = factor * red + bias;
+                    blue    = factor * blue + bias;
+                    green   = factor * green + bias;
+                    red     = factor * red + bias;
 
-                    blue = (blue > 255 ? 255 : blue < 0 ? 0 : blue);
-                    green = (blue > 255 ? 255 : green < 0 ? 0 : green);
-                    red = (red > 255 ? 255 : red < 0 ? 0 : red);
+                    blue    =   (blue > 255 ? 255 : blue < 0 ? 0 : blue);
+                    green   =   (blue > 255 ? 255 : green < 0 ? 0 : green);
+                    red     =   (red > 255 ? 255 : red < 0 ? 0 : red);
 
                     resultBuffer[byteOffset] = (byte)(blue);
                     resultBuffer[byteOffset + 1] = (byte)(green);
@@ -128,11 +128,9 @@ namespace image_modification.controllers
             ImageModel source,
             double[,] xFilterMatrix,
             double[,] yFilterMatrix,
-            double factor = 1,
-            int bias = 0,
             bool grayscale = false)
         {
-            Bitmap sourceBitmap = source.getImage();
+            Bitmap sourceBitmap = source.GetBitmapImage();
             BitmapData sourceData = sourceBitmap.LockBits(
                 new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height),
                 ImageLockMode.ReadOnly,
@@ -146,11 +144,9 @@ namespace image_modification.controllers
 
             if (grayscale == true)
             {
-                float rgb = 0;
-
                 for (int k = 0; k < pixelBuffer.Length; k += 4)
                 {
-                    rgb = pixelBuffer[k] * 0.11f;
+                    float rgb = pixelBuffer[k] * 0.11f;
                     rgb += pixelBuffer[k + 1] * 0.59f;
                     rgb += pixelBuffer[k + 2] * 0.3f;
 
@@ -161,62 +157,50 @@ namespace image_modification.controllers
                 }
             }
 
-            double blueX = 0.0;
-            double greenX = 0.0;
-            double redX = 0.0;
-
-            double blueY = 0.0;
-            double greenY = 0.0;
-            double redY = 0.0;
-
-            double blueTotal = 0.0;
-            double greenTotal = 0.0;
-            double redTotal = 0.0;
-
             int filterOffset = 1;
-            int calcOffset = 0;
-
-            int byteOffset = 0;
-
             for (int offsetY = filterOffset; offsetY <
                 sourceBitmap.Height - filterOffset; offsetY++)
             {
                 for (int offsetX = filterOffset; offsetX <
                     sourceBitmap.Width - filterOffset; offsetX++)
                 {
-                    blueX = greenX = redX = 0;
-                    blueY = greenY = redY = 0;
-                    blueTotal = greenTotal = redTotal = 0.0;
-                    byteOffset = offsetY *
-                                 sourceData.Stride +
-                                 offsetX * 4;
+                    double blueX, greenX, redX;
+                    blueX = greenX = redX = 0.0;
+
+                    double blueY, greenY, redY;
+                    blueY = greenY = redY = 0.0;
+
+                    double blueTotal, greenTotal, redTotal;
+                    int byteOffset = offsetY * sourceData.Stride + offsetX * 4;
 
                     for (int filterY = -filterOffset; filterY <= filterOffset; filterY++)
-                        for (int filterX = -filterOffset;filterX <= filterOffset; filterX++)
+                    {
+                        for (int filterX = -filterOffset; filterX <= filterOffset; filterX++)
                         {
-                            calcOffset = byteOffset + (filterX * 4) + (filterY * sourceData.Stride);
+                            int calcOffset = byteOffset + (filterX * 4) + (filterY * sourceData.Stride);
 
-                            blueX += pixelBuffer[calcOffset] * xFilterMatrix[filterY + filterOffset, filterX + filterOffset];
-                            greenX += pixelBuffer[calcOffset + 1]* xFilterMatrix[filterY + filterOffset, filterX + filterOffset];
-                            redX += pixelBuffer[calcOffset + 2] * xFilterMatrix[filterY + filterOffset, filterX + filterOffset];
+                            blueX   += pixelBuffer[calcOffset]      * xFilterMatrix[filterY + filterOffset, filterX + filterOffset];
+                            greenX  += pixelBuffer[calcOffset + 1]  * xFilterMatrix[filterY + filterOffset, filterX + filterOffset];
+                            redX    += pixelBuffer[calcOffset + 2]  * xFilterMatrix[filterY + filterOffset, filterX + filterOffset];
 
-                            blueY += pixelBuffer[calcOffset] * yFilterMatrix[filterY + filterOffset, filterX + filterOffset];
-                            greenY += pixelBuffer[calcOffset + 1] * yFilterMatrix[filterY + filterOffset, filterX + filterOffset];
-                            redY += pixelBuffer[calcOffset + 2] * yFilterMatrix[filterY + filterOffset, filterX + filterOffset];
+                            blueY   += pixelBuffer[calcOffset]      * yFilterMatrix[filterY + filterOffset, filterX + filterOffset];
+                            greenY  += pixelBuffer[calcOffset + 1]  * yFilterMatrix[filterY + filterOffset, filterX + filterOffset];
+                            redY    += pixelBuffer[calcOffset + 2]  * yFilterMatrix[filterY + filterOffset, filterX + filterOffset];
                         }
+                    }
 
-                    blueTotal = Math.Sqrt((blueX * blueX) + (blueY * blueY));
-                    greenTotal = Math.Sqrt((greenX * greenX) + (greenY * greenY));
-                    redTotal = Math.Sqrt((redX * redX) + (redY * redY));
+                    blueTotal   =   Math.Sqrt((blueX * blueX) + (blueY * blueY));
+                    greenTotal  =   Math.Sqrt((greenX * greenX) + (greenY * greenY));
+                    redTotal    =   Math.Sqrt((redX * redX) + (redY * redY));
 
-                    blueTotal = (blueTotal > 255 ? 255 : blueTotal < 0 ? 0 : blueTotal);
-                    greenTotal = (blueTotal > 255 ? 255 : greenTotal < 0 ? 0 : greenTotal);
-                    redTotal = (redTotal > 255 ? 255 : redTotal < 0 ? 0 : redTotal);
+                    blueTotal   = (blueTotal > 255 ? 255 : blueTotal < 0 ? 0 : blueTotal);
+                    greenTotal  = (blueTotal > 255 ? 255 : greenTotal < 0 ? 0 : greenTotal);
+                    redTotal    = (redTotal > 255 ? 255 : redTotal < 0 ? 0 : redTotal);
 
-                    resultBuffer[byteOffset] = (byte)(blueTotal);
-                    resultBuffer[byteOffset + 1] = (byte)(greenTotal);
-                    resultBuffer[byteOffset + 2] = (byte)(redTotal);
-                    resultBuffer[byteOffset + 3] = 255;
+                    resultBuffer[byteOffset]        = (byte)(blueTotal);
+                    resultBuffer[byteOffset + 1]    = (byte)(greenTotal);
+                    resultBuffer[byteOffset + 2]    = (byte)(redTotal);
+                    resultBuffer[byteOffset + 3]    = 255;
                 }
             }
 
