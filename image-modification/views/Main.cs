@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
+using image_modification.controllers;
 using image_modification.controllers.classes;
 
 namespace image_modification.views
@@ -18,7 +19,7 @@ namespace image_modification.views
                     EDGE_PREWITT_3X3 = 1,
                     EDGE_KIRSCH = 2;
 
-        private ImageController imageController = new ImageController();
+        private ImageController imageController = new ImageController(new FilterController(), new EdgeDetectionController());
 
         public Main()
         {

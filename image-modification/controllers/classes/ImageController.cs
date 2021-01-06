@@ -25,11 +25,10 @@ namespace image_modification.controllers.classes
             EDGE_PREWITT_3X3 = 1,
             EDGE_KIRSCH = 2;
 
-
-        public ImageController()
+        public ImageController(FilterController filterController, EdgeDetectionController edgeController)
         {
-            filterController = new FilterController();
-            edgeDetectionController = new EdgeDetectionController();
+            this.filterController = filterController;
+            this.edgeDetectionController = edgeController;
         }
 
         public void SaveImage()
