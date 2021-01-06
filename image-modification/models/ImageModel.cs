@@ -3,7 +3,7 @@ using System.IO;
 
 namespace image_modification
 {
-    class ImageModel
+    public class ImageModel
     {
         private Bitmap image;
 

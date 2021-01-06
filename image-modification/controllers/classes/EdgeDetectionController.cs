@@ -88,6 +88,7 @@ namespace image_modification.controllers
                     int byteOffset = offsetY * sourceData.Stride + offsetX * 4;
 
                     for (int filterY = -filterOffset; filterY <= filterOffset; filterY++)
+                    {
                         for (int filterX = -filterOffset; filterX <= filterOffset; filterX++)
                         {
                             int calcOffset = byteOffset + (filterX * 4) + (filterY * sourceData.Stride);
@@ -95,6 +96,7 @@ namespace image_modification.controllers
                             green += pixelBuffer[calcOffset + 1] * filterMatrix[filterY + filterOffset, filterX + filterOffset];
                             red += pixelBuffer[calcOffset + 2] * filterMatrix[filterY + filterOffset, filterX + filterOffset];
                         }
+                    }
 
                     blue    = factor * blue + bias;
                     green   = factor * green + bias;
