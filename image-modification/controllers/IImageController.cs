@@ -14,6 +14,6 @@
         ImageModel ApplyFilters(ImageModel image);
         ImageModel ApplyEdgeDetection(ImageModel image);
 
-        ImageModel GetResultImage(int width);
+        ImageModel GetResultImage(int width = 0);
     }
 }

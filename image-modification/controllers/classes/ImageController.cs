@@ -9,14 +9,14 @@ using System;
 
 namespace image_modification.controllers.classes
 {
-    class ImageController : IImageController
+    public class ImageController : IImageController
     {
-        private ImageModel image;
+        public ImageModel image;
         private IFilterController filterController;
         private IEdgeDetectionController edgeDetectionController;
 
-        private List<int> filters = new List<int>();
-        private List<int> edgeDetections = new List<int>();
+        public List<int> filters = new List<int>();
+        public List<int> edgeDetections = new List<int>();
 
         private const int 
             FILTER_RAINBOW = 0, 
@@ -26,7 +26,7 @@ namespace image_modification.controllers.classes
             EDGE_PREWITT_3X3 = 1,
             EDGE_KIRSCH = 2;
 
-        public ImageController(FilterController filterController, EdgeDetectionController edgeController)
+        public ImageController(IFilterController filterController, IEdgeDetectionController edgeController)
         {
             this.filterController = filterController;
             this.edgeDetectionController = edgeController;
@@ -111,7 +111,6 @@ namespace image_modification.controllers.classes
         public void AddFilter(int filter)
         {
             filters.Add(filter);
-
         }
 
         // Remove a specific filter from the list
@@ -120,6 +119,7 @@ namespace image_modification.controllers.classes
             for(int i = 0; i < filters.Count; i++)
             {
                 if (filters[i] == filter) filters.RemoveAt(i);
+                Console.WriteLine(filters);
             }
         }
 
