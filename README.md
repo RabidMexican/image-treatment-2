@@ -11,7 +11,7 @@
 ✅ Save the modified image into a file  
 
 ## Must Have
-⬜️ Exceptions  
+✅ Exceptions  
 ✅ Methods that return void  
 ✅ Methods that return classes   
 
