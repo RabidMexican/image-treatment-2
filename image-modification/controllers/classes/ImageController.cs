@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.IO;
+using System;
 
 namespace image_modification.controllers.classes
 {
-    public class ImageController : IImageController
+    class ImageController : IImageController
     {
         private ImageModel image;
         private IFilterController filterController;
@@ -31,57 +32,55 @@ namespace image_modification.controllers.classes
             this.edgeDetectionController = edgeController;
         }
 
-        public void SaveImage()
+        public void SaveImage(string destination)
         {
             if (image != null)
             {
                 // Get result image
                 Bitmap bitmapImage = GetResultImage().GetBitmapImage();
 
-                // Open file explorer dialog to choose a location to save
-                SaveFileDialog sfd = new SaveFileDialog
+                // Set default file extension
+                string fileExtension = Path.GetExtension(destination).ToUpper();
+                ImageFormat imgFormat = ImageFormat.Png;
+
+                // Check for new file extension
+                switch (fileExtension)
                 {
-                    Title = "Specify a file name and file path",
-                    Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg|Bitmap Images(*.bmp)|*.bmp"
-                };
-
-                // If OK is clicked
-                if (sfd.ShowDialog() == DialogResult.OK)
-                {
-                    string fileExtension = Path.GetExtension(sfd.FileName).ToUpper();
-                    ImageFormat imgFormat = ImageFormat.Png;
-
-                    // Check for file extension
-                    switch (fileExtension)
-                    {
-                        case "BMP": imgFormat = ImageFormat.Bmp; break;
-                        case "JPG": imgFormat = ImageFormat.Jpeg; break;
-                    }
-
-                    // Write image to disk and close the stream writer
-                    StreamWriter streamWriter = new StreamWriter(sfd.FileName, false);
-                    bitmapImage.Save(streamWriter.BaseStream, imgFormat);
-                    streamWriter.Flush();
-                    streamWriter.Close();
+                    case "BMP": imgFormat = ImageFormat.Bmp; break;
+                    case "JPG": imgFormat = ImageFormat.Jpeg; break;
                 }
+
+                // Write image to disk and close the stream writer
+                StreamWriter streamWriter = new StreamWriter(destination, false);
+                bitmapImage.Save(streamWriter.BaseStream, imgFormat);
+                streamWriter.Flush();
+                streamWriter.Close();
             }
         }
 
-        public bool LoadImage()
+        public bool LoadImage(string source)
         {
-            // Open file explorer dialog to choose an image 
-            OpenFileDialog ofd = new OpenFileDialog
-            {
-                Title = "Select an image file",
-                Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg|Bitmap Images(*.bmp)|*.bmp"
-            };
+            // Extract the filename with extension
+            string name = Path.GetFileName(source);
 
-            // If OK is clicked
-            if (ofd.ShowDialog() == DialogResult.OK)
+            // Get image from source
+            try
             {
-                image = new ImageModel(ofd.FileName);
-                return true;
+                StreamReader streamReader = new StreamReader(source);
+                Bitmap sourceImage = (Bitmap)Image.FromStream(streamReader.BaseStream);
+                streamReader.Close();
+
+                image = new ImageModel(sourceImage, name);
             }
+            catch (FileNotFoundException e)
+            {
+                Console.WriteLine("WARNING : image " + name + " not found!");
+                Console.WriteLine(e);
+                return false;
+            }
+
+            // Checks image and returns if it has been initialised
+            if (image != null) return true;
             return false;
         }
 

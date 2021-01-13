@@ -2,8 +2,8 @@
 {
   public interface IImageController
     {
-        bool LoadImage();
-        void SaveImage();
+        bool LoadImage(string source);
+        void SaveImage(string destination);
 
         void AddFilter(int filter);
         void RemoveFilter(int filter);

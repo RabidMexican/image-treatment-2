@@ -153,27 +153,52 @@ namespace image_modification.views
         // Button to save the new image
         private void OnbuttonSave_Click(object sender, EventArgs e)
         {
-            imageController.SaveImage();
+            // Open file save dialog window 
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Title = "Specify a file name and file path",
+                Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg|Bitmap Images(*.bmp)|*.bmp"
+            };
+
+            // If OK is clicked
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                imageController.SaveImage(sfd.FileName);
+            }
+                
         }
  
         // Button to load an image for treatment
         private void OnButtonLoadClick(object sender, EventArgs e)
         {
-            // Loads an image from the image controller
-            bool imageLoaded = imageController.LoadImage();
-
-            if(imageLoaded)
+            // Open file explorer dialog to choose an image 
+            OpenFileDialog ofd = new OpenFileDialog
             {
-                // Reset filters and update image
-                ResetFilters();
-                ResetEdgeDetections();
-                UpdatePreviewImage();
+                Title = "Select an image file",
+                Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg|Bitmap Images(*.bmp)|*.bmp"
+            };
 
-                //if image correctly loaded we can add filters or save the new picture
-                ToggleFilters(true);
-                buttonSave.Enabled = true;
-                checkboxFiltersDone.Enabled = true;
+            // If OK is clicked
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                // Loads an image from the image controller
+                bool imageLoaded = imageController.LoadImage(ofd.FileName);
+
+                if (imageLoaded)
+                {
+                    // Reset filters and update image
+                    ResetFilters();
+                    ResetEdgeDetections();
+                    UpdatePreviewImage();
+
+                    //if image correctly loaded we can add filters or save the new picture
+                    ToggleFilters(true);
+                    buttonSave.Enabled = true;
+                    checkboxFiltersDone.Enabled = true;
+                }
             }
+
+            
         }
     }
 }
