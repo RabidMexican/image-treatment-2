@@ -1,6 +1,6 @@
 ﻿namespace image_modification
 {
-    interface IFilterController
+ public interface IFilterController
     {
         ImageModel ApplyRainbowFilter(ImageModel image);
         ImageModel ApplySwapFilter(ImageModel image);

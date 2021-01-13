@@ -6,9 +6,9 @@ using System.Drawing.Drawing2D;
 
 using image_modification.controllers.classes;
 
-namespace image_modification.controllers
+namespace image_modification.controllers.classes
 {
-    class EdgeDetectionController : IEdgeDetectionController
+  public  class EdgeDetectionController : IEdgeDetectionController
     {
         public ImageModel ApplyLaplacian3x3(ImageModel sourceBitmap, bool grayscale = false)
         {

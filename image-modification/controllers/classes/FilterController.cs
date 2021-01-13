@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Drawing;
 
-namespace image_modification.controllers
+namespace image_modification.controllers.classes
 {
-    class FilterController : IFilterController
+ public class FilterController : IFilterController
     {
+
+        
         // Apply the rainbow filter
         public ImageModel ApplyRainbowFilter(ImageModel image)
         {

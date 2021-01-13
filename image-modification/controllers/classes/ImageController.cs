@@ -8,7 +8,7 @@ using System.IO;
 
 namespace image_modification.controllers.classes
 {
-    class ImageController : IImageController
+    public class ImageController : IImageController
     {
         private ImageModel image;
         private IFilterController filterController;

@@ -1,6 +1,6 @@
 ﻿namespace image_modification
 {
-    interface IImageController
+  public interface IImageController
     {
         bool LoadImage();
         void SaveImage();

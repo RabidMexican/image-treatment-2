@@ -1,6 +1,6 @@
 ﻿namespace image_modification
 {
-    interface IEdgeDetectionController
+ public interface IEdgeDetectionController
     {
         ImageModel ApplyLaplacian3x3(ImageModel image, bool grayscale = false);
         ImageModel ApplyPrewitt(ImageModel image, bool grayscale = false);
