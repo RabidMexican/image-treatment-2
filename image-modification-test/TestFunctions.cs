@@ -16,7 +16,7 @@ namespace image_modification_test
             int i, j;
 
             // Create new image with 16x16 pixels
-            Bitmap bmpMin = new Bitmap(source, new Size(16, 16));
+            Bitmap bmpMin = new Bitmap(source.GetBitmapImage(), new Size(16, 16));
 
             // Loop through the 16x16 image and add each pixel to the list
             for (j = 0; j < bmpMin.Height; j++)
@@ -30,7 +30,7 @@ namespace image_modification_test
             // Convert the pixel list into a SHA1 hash
             SHA1Managed sha = new SHA1Managed();
             byte[] checksum = sha.ComputeHash(colorList.ToArray());
-            hash = BitConverter.ToString(checksum).Replace("-", String.Empty);
+            hash = BitConverter.ToString(checksum).Replace("-", string.Empty);
 
             // Get rid of the old resources
             sha.Dispose();

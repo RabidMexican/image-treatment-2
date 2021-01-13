@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using image_modification;
-using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Drawing;
-
 using image_modification.controllers.classes;
 
 namespace image_modification_test

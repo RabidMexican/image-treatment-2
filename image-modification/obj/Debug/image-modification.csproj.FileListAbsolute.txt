@@ -1,7 +1,6 @@
 C:\Users\benpo\git\image-modification\image-modification\bin\Debug\image-modification.exe.config
 C:\Users\benpo\git\image-modification\image-modification\bin\Debug\image-modification.exe
 C:\Users\benpo\git\image-modification\image-modification\bin\Debug\image-modification.pdb
-C:\Users\benpo\git\image-modification\image-modification\obj\Debug\image-modification.csprojAssemblyReference.cache
 C:\Users\benpo\git\image-modification\image-modification\obj\Debug\image_modification.Properties.Resources.resources
 C:\Users\benpo\git\image-modification\image-modification\obj\Debug\image-modification.csproj.GenerateResource.cache
 C:\Users\benpo\git\image-modification\image-modification\obj\Debug\image-modification.csproj.CoreCompileInputs.cache
