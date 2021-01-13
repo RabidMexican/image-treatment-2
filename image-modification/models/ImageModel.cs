@@ -24,7 +24,7 @@ namespace image_modification
             // Extract height and width from image
             height = image.Height;
             width = image.Width;
-            Console.WriteLine(name + " : " + height + "x" + width);
+
             streamReader.Close();
         }
 
