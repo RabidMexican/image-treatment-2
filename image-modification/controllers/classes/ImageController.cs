@@ -50,11 +50,20 @@ namespace image_modification.controllers.classes
                     case "JPG": imgFormat = ImageFormat.Jpeg; break;
                 }
 
-                // Write image to disk and close the stream writer
-                StreamWriter streamWriter = new StreamWriter(destination, false);
-                bitmapImage.Save(streamWriter.BaseStream, imgFormat);
-                streamWriter.Flush();
-                streamWriter.Close();
+                try
+                {
+                    // Write image to disk and close the stream writer
+                    StreamWriter streamWriter = new StreamWriter(destination, false);
+                    bitmapImage.Save(streamWriter.BaseStream, imgFormat);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+                catch (DirectoryNotFoundException e)
+                {
+                    Console.WriteLine("Error saving image " + destination + "! The directory was not found!");
+                    Console.WriteLine(e);
+                }
+                
             }
         }
 
