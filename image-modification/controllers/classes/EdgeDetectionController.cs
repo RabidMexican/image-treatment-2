@@ -122,8 +122,7 @@ namespace image_modification.controllers
 
             Marshal.Copy(resultBuffer, 0, resultData.Scan0, resultBuffer.Length);
             resultBitmap.UnlockBits(resultData);
-
-            return new ImageModel(resultBitmap);
+            return new ImageModel(resultBitmap, source.name);
         }
 
         public static ImageModel ConvolutionFilter(
@@ -216,7 +215,7 @@ namespace image_modification.controllers
             Marshal.Copy(resultBuffer, 0, resultData.Scan0, resultBuffer.Length);
             resultBitmap.UnlockBits(resultData);
 
-            return new ImageModel(resultBitmap);
+            return new ImageModel(resultBitmap, source.name);
         }
     }
 }

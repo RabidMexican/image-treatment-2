@@ -28,9 +28,15 @@ namespace image_modification
             streamReader.Close();
         }
 
-        public ImageModel(Bitmap source)
+        public ImageModel(Bitmap source, string name)
         {
+            // Update from parameters
             image = source;
+            this.name = name;
+
+            // Update bitmap dimensions
+            height = image.Height;
+            width = image.Width;
         }
 
         public Bitmap GetBitmapImage()
@@ -38,9 +44,5 @@ namespace image_modification
             return image;
         }
 
-        public void SetImage(Bitmap image)
-        {
-            this.image = image;
-        }
     }
 }

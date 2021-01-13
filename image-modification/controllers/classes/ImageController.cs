@@ -191,7 +191,7 @@ namespace image_modification.controllers.classes
                 graphicsResult.Flush();
             }
 
-            return new ImageModel(bitmapResult);
+            return new ImageModel(bitmapResult, image.name);
         }
     }
 }

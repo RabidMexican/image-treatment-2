@@ -39,7 +39,7 @@ namespace image_modification.controllers
                 }
             }
 
-            return new ImageModel(result);
+            return new ImageModel(result, image.name);
         }
 
         //apply filter that swaps all pixel colors
@@ -56,7 +56,7 @@ namespace image_modification.controllers
                     bmp.SetPixel(i, x, cLayer);
                 }
 
-            return new ImageModel(bmp);
+            return new ImageModel(bmp, image.name);
         }
 
         public ImageModel ApplyBlackWhiteFilter(ImageModel image)
@@ -72,7 +72,7 @@ namespace image_modification.controllers
                     rgb = ((c.R + c.G + c.B) / 3);
                     bmp.SetPixel(x, y, Color.FromArgb(rgb, rgb, rgb));
                 }
-            return new ImageModel(bmp);
+            return new ImageModel(bmp, image.name);
         }
 
     }
