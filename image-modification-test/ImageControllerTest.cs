@@ -23,6 +23,9 @@ namespace image_modification_test
         private ImageModel original_lap     = new ImageModel(Properties.Resources.SmileyEdgeLaplacian, nameof(Properties.Resources.SmileyEdgeLaplacian));
         private ImageModel original_prewitt = new ImageModel(Properties.Resources.SmileyEdgePrewitt, nameof(Properties.Resources.SmileyEdgePrewitt));
 
+        private ImageModel original_high = new ImageModel(Properties.Resources.bag, nameof(Properties.Resources.bag));
+        private ImageModel original_bmp = new ImageModel(Properties.Resources.pikachu, nameof(Properties.Resources.pikachu));
+
         // Test saving image
         [TestMethod]
         public void SaveImage()
@@ -56,8 +59,20 @@ namespace image_modification_test
             var filterRepository = Substitute.For<IFilterController>();
             var edgeDetRepository = Substitute.For<IEdgeDetectionController>();
 
-            // Check that Save Image throws an exception when the path is not correct
-            imageController.SaveImage(path);
+            imageController = new ImageController(filterRepository, edgeDetRepository);
+            imageController.image = original;
+
+            // Check that Save Image does not throw an exception
+            try
+            {
+                imageController.SaveImage(path);
+            }
+            catch(DirectoryNotFoundException e)
+            {
+                Assert.Fail();
+            }
+            // If no exception was thrown the test passes
+            Assert.IsTrue(true);
         }
 
         // Test loading of image
@@ -80,6 +95,31 @@ namespace image_modification_test
 
             // Comparison
             Assert.AreEqual(originalHash, testHash);
+        }
+
+        // Test loading of image
+        [TestMethod]
+        public void LoadImage_Exception()
+        {
+            string path = @"Z:\Tests\Smiley.png";
+
+            // Create substitutes for interfaces
+            var filterRepository = Substitute.For<IFilterController>();
+            var edgeDetRepository = Substitute.For<IEdgeDetectionController>();
+
+            imageController = new ImageController(filterRepository, edgeDetRepository);
+            bool test = true;
+
+            // Create controller
+            try
+            {
+                test = imageController.LoadImage(path);
+            } 
+            catch (DirectoryNotFoundException)
+            {
+                Assert.Fail();
+            }
+            Assert.AreEqual(test, false);
         }
 
         // Test image result
@@ -384,6 +424,26 @@ namespace image_modification_test
 
             // Check rendered preview image is the correct size
             Assert.IsTrue(testImage.width == PREVIEW_IMAGE_SIZE);
+        }
+
+        [TestMethod]
+        public void GetPreviewImage_High()
+        {
+            int PREVIEW_IMAGE_SIZE = 500;
+
+            // Create substitutes for interfaces
+            var filterRepository = Substitute.For<IFilterController>();
+            var edgeDetRepository = Substitute.For<IEdgeDetectionController>();
+
+            // Create controller
+            imageController = new ImageController(filterRepository, edgeDetRepository);
+            imageController.image = original_high;
+
+            // Perform test
+            ImageModel testImage = imageController.GetPreviewImage(PREVIEW_IMAGE_SIZE);
+
+            // Check rendered preview image is the correct size
+            Assert.IsTrue(testImage.height == PREVIEW_IMAGE_SIZE);
         }
     }
 }

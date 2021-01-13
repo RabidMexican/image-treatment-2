@@ -157,7 +157,7 @@ namespace image_modification.views
             SaveFileDialog sfd = new SaveFileDialog
             {
                 Title = "Specify a file name and file path",
-                Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg|Bitmap Images(*.bmp)|*.bmp"
+                Filter = "Png Images(*.png)|*.png"
             };
 
             // If OK is clicked

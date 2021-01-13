@@ -39,16 +39,8 @@ namespace image_modification.controllers.classes
                 // Get result image
                 Bitmap bitmapImage = GetResultImage().GetBitmapImage();
 
-                // Set default file extension
-                string fileExtension = Path.GetExtension(destination).ToUpper();
+                // Set file extension
                 ImageFormat imgFormat = ImageFormat.Png;
-
-                // Check for new file extension
-                switch (fileExtension)
-                {
-                    case "BMP": imgFormat = ImageFormat.Bmp; break;
-                    case "JPG": imgFormat = ImageFormat.Jpeg; break;
-                }
 
                 try
                 {
@@ -58,7 +50,7 @@ namespace image_modification.controllers.classes
                     streamWriter.Flush();
                     streamWriter.Close();
                 }
-                catch (Exception e)
+                catch (DirectoryNotFoundException e)
                 {
                     Console.WriteLine("Error saving image " + destination + "! The directory was not found!");
                     Console.WriteLine(e);
@@ -81,11 +73,10 @@ namespace image_modification.controllers.classes
 
                 image = new ImageModel(sourceImage, name);
             }
-            catch (NullReferenceException e)
+            catch (DirectoryNotFoundException e)
             {
                 Console.WriteLine("WARNING : image " + name + " not found!");
                 Console.WriteLine(e);
-                return false;
             }
 
             // Checks image and returns if it has been initialised
@@ -174,15 +165,22 @@ namespace image_modification.controllers.classes
         {
             // TODO : replace this with something better?
             float ratio = 1.0f;
-            int maxSide = image.GetBitmapImage().Width > image.GetBitmapImage().Height ?
-                          image.GetBitmapImage().Width : image.GetBitmapImage().Height;
+            Bitmap bitmapResult;
+            int maxSide;
 
-            ratio = (float)maxSide / (float)width;
-
-            Bitmap bitmapResult = (
-                image.GetBitmapImage().Width > image.GetBitmapImage().Height 
-                    ? new Bitmap(width, (int)(image.GetBitmapImage().Height / ratio))
-                    : new Bitmap((int)(image.GetBitmapImage().Width / ratio), width));
+            // Correct image dimensions for preview in app
+            if (image.GetBitmapImage().Width > image.GetBitmapImage().Height)
+            {
+                maxSide = image.GetBitmapImage().Width;
+                ratio = (float)maxSide / (float)width;
+                bitmapResult = new Bitmap(width, (int)(image.GetBitmapImage().Height / ratio));
+            }
+            else
+            {
+                maxSide = image.GetBitmapImage().Height;
+                ratio = (float)maxSide / (float)width;
+                bitmapResult = new Bitmap((int)(image.GetBitmapImage().Width / ratio), width);
+            }
 
             using (Graphics graphicsResult = Graphics.FromImage(bitmapResult))
             {

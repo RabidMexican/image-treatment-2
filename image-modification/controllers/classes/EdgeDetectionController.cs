@@ -87,7 +87,7 @@ namespace image_modification.controllers.classes
                     red     = factor * red + bias;
 
                     blue    =   (blue > 255 ? 255 : blue < 0 ? 0 : blue);
-                    green   =   (blue > 255 ? 255 : green < 0 ? 0 : green);
+                    green   =   (green > 255 ? 255 : green < 0 ? 0 : green);
                     red     =   (red > 255 ? 255 : red < 0 ? 0 : red);
 
                     resultBuffer[byteOffset] = (byte)(blue);
@@ -164,7 +164,7 @@ namespace image_modification.controllers.classes
                     redTotal    =   Math.Sqrt((redX * redX) + (redY * redY));
 
                     blueTotal   = (blueTotal > 255 ? 255 : blueTotal < 0 ? 0 : blueTotal);
-                    greenTotal  = (blueTotal > 255 ? 255 : greenTotal < 0 ? 0 : greenTotal);
+                    greenTotal  = (greenTotal > 255 ? 255 : greenTotal < 0 ? 0 : greenTotal);
                     redTotal    = (redTotal > 255 ? 255 : redTotal < 0 ? 0 : redTotal);
 
                     resultBuffer[byteOffset]        = (byte)(blueTotal);
