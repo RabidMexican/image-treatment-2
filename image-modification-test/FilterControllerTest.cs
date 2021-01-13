@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Drawing;
+
 using image_modification.controllers.classes;
 
 namespace image_modification_test
@@ -18,22 +19,24 @@ namespace image_modification_test
         [TestMethod]
         public void ApplyRainbowFilter()
         {
-       
+            // Get base image
+            ImageModel testImage = new ImageModel(
+                Properties.Resources.Smiley,
+                nameof(Properties.Resources.Smiley));
 
-            //get images from Resources
-            ImageModel testImage = new ImageModel(image_modification_test.Properties.Resources.Smiley);
-            ImageModel realResult = new ImageModel(image_modification_test.Properties.Resources.SmileyRainbow);
+            // Get filter result image
+            ImageModel realResult = new ImageModel(
+                Properties.Resources.SmileyRainbow,
+                nameof(Properties.Resources.SmileyRainbow));
 
-            //apply filter on test image
+            // Apply filter on test image
             ImageModel result = controller.ApplyRainbowFilter(testImage);
 
+            // Get hash of images
+            string resultImageHash = TestFunctions.GetImageHash(result);
+            string realResultImageHash = TestFunctions.GetImageHash(realResult);
 
-            //get Hash from images
-            String resultImageHash = GetImageHash(result);
-            String realResultImageHash = GetImageHash(realResult);
-
-
-            //comparison
+            // Comparison
             Assert.AreEqual(resultImageHash, realResultImageHash);
         }
 
@@ -51,29 +54,5 @@ namespace image_modification_test
             Assert.IsTrue(false);
         }
 
-
-        private string GetImageHash(ImageModel bmpSourceImage)
-        {
-            Bitmap bmpSource = bmpSourceImage.GetBitmapImage();
-            List<byte> colorList = new List<byte>();
-            string hash;
-
-            colorList.Clear();
-            int i, j;
-            Bitmap bmpMin = new Bitmap(bmpSource, new Size(16, 16)); //create new image with 16x16 pixel
-            for (j = 0; j < bmpMin.Height; j++)
-            {
-                for (i = 0; i < bmpMin.Width; i++)
-                {
-                    colorList.Add(bmpMin.GetPixel(i, j).R);
-                }
-            }
-            SHA1Managed sha = new SHA1Managed();
-            byte[] checksum = sha.ComputeHash(colorList.ToArray());
-            hash = BitConverter.ToString(checksum).Replace("-", String.Empty);
-            sha.Dispose();
-            bmpMin.Dispose();
-            return hash;
-        }
     }
 }
