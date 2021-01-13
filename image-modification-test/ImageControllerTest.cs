@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace image_modification_test
 {
@@ -18,15 +19,56 @@ namespace image_modification_test
         [TestMethod]
         public void SaveImage()
         {
-            //Assert.Fail("Even though the sms sender threw an exception, it should not escape the login controller");
-            Assert.IsTrue(false);
+            string path = @"C:\Tests\Smiley.png";
+
+            // Create substitutes for interfaces
+            var filterRepository = Substitute.For<IFilterController>();
+            var edgeDetRepository = Substitute.For<IEdgeDetectionController>();
+            imageController = new ImageController(filterRepository, edgeDetRepository);
+
+            // Get resource images
+            ImageModel original = new ImageModel(
+                Properties.Resources.Smiley,
+                nameof(Properties.Resources.Smiley));
+
+            // Save and recouperate the image
+            imageController.image = original;
+            imageController.SaveImage(path);
+            imageController.LoadImage(path);
+
+            // Get hash of images
+            string originalHash = TestFunctions.GetImageHash(original);
+            string testHash = TestFunctions.GetImageHash(imageController.image);
+
+            // Comparison
+            Assert.AreEqual(originalHash, testHash);
         }
 
         // Test loading of image
         [TestMethod]
         public void LoadImage()
         {
-            Assert.IsTrue(false);
+      
+            string path = @"C:\Tests\Smiley.png";
+
+            // Create substitutes for interfaces
+            var filterRepository = Substitute.For<IFilterController>();
+            var edgeDetRepository = Substitute.For<IEdgeDetectionController>();
+            imageController = new ImageController(filterRepository, edgeDetRepository);
+
+            // Get resource images
+            ImageModel original = new ImageModel(
+                Properties.Resources.Smiley,
+                nameof(Properties.Resources.Smiley));
+
+            imageController.LoadImage(path);
+
+            // Get hash of images
+            string originalHash = TestFunctions.GetImageHash(original);
+            string testHash= TestFunctions.GetImageHash(imageController.image);
+
+            // Comparison
+            Assert.AreEqual(originalHash, testHash);
         }
 
         // Test image result
@@ -150,11 +192,11 @@ namespace image_modification_test
             ImageModel testImage = imageController.ApplyFilters(original);
 
             // Get hash of images
-            string resultImageHash = TestFunctions.GetImageHash(result);
-            string realResultImageHash = TestFunctions.GetImageHash(testImage);
+            string originalHash = TestFunctions.GetImageHash(result);
+            string testHash = TestFunctions.GetImageHash(testImage);
 
             // Comparison
-            Assert.AreEqual(resultImageHash, realResultImageHash);
+            Assert.AreEqual(originalHash, testHash);
         }
 
         // Test application of edge detections
