@@ -27,7 +27,7 @@ namespace image_modification.controllers.classes
                 grayscale);
         }
 
-        public ImageModel ApplyKirsch(ImageModel image, bool grayscale)
+        public ImageModel ApplyKirsch(ImageModel image, bool grayscale = false)
         {
             return ConvolutionFilter(
                 image,

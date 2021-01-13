@@ -39,14 +39,50 @@ namespace image_modification_test
         [TestMethod]
         public void ApplySwapFilter()
         {
-            Assert.IsTrue(false);
+            // Get base image
+            ImageModel testImage = new ImageModel(
+                Properties.Resources.Smiley,
+                nameof(Properties.Resources.Smiley));
+
+            // Get filter result image
+            ImageModel realResult = new ImageModel(
+                Properties.Resources.SmileySwap,
+                nameof(Properties.Resources.SmileySwap));
+
+            // Apply filter on test image
+            ImageModel result = controller.ApplySwapFilter(testImage);
+
+            // Get hash of images
+            string resultImageHash = TestFunctions.GetImageHash(result);
+            string realResultImageHash = TestFunctions.GetImageHash(realResult);
+
+            // Comparison
+            Assert.AreEqual(resultImageHash, realResultImageHash);
         }
 
         // Test black & white filter
         [TestMethod]
         public void ApplyBlackWhiteFilter()
         {
-            Assert.IsTrue(false);
+            // Get base image
+            ImageModel testImage = new ImageModel(
+                Properties.Resources.Smiley,
+                nameof(Properties.Resources.Smiley));
+
+            // Get filter result image
+            ImageModel realResult = new ImageModel(
+                Properties.Resources.SmileyBlackAndWhite,
+                nameof(Properties.Resources.SmileyBlackAndWhite));
+
+            // Apply filter on test image
+            ImageModel result = controller.ApplyBlackWhiteFilter(testImage);
+
+            // Get hash of images
+            string resultImageHash = TestFunctions.GetImageHash(result);
+            string realResultImageHash = TestFunctions.GetImageHash(realResult);
+
+            // Comparison
+            Assert.AreEqual(resultImageHash, realResultImageHash);
         }
 
     }
