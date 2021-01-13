@@ -58,7 +58,7 @@ namespace image_modification.controllers.classes
                     streamWriter.Flush();
                     streamWriter.Close();
                 }
-                catch (DirectoryNotFoundException e)
+                catch (Exception e)
                 {
                     Console.WriteLine("Error saving image " + destination + "! The directory was not found!");
                     Console.WriteLine(e);
@@ -81,7 +81,7 @@ namespace image_modification.controllers.classes
 
                 image = new ImageModel(sourceImage, name);
             }
-            catch (FileNotFoundException e)
+            catch (NullReferenceException e)
             {
                 Console.WriteLine("WARNING : image " + name + " not found!");
                 Console.WriteLine(e);

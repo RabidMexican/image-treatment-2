@@ -50,26 +50,14 @@ namespace image_modification_test
         [TestMethod]
         public void SaveImage_Exception_DirectoryNotFound()
         {
-/*            string path = @"Z:\Tests\Smiley.png";
+            string path = @"Z:\Tests\Smiley.png";
 
             // Create substitutes for interfaces
             var filterRepository = Substitute.For<IFilterController>();
             var edgeDetRepository = Substitute.For<IEdgeDetectionController>();
-            imageController = new ImageController(filterRepository, edgeDetRepository);
 
-            // Save and recouperate the image
-            imageController.image = original;
-
-            try
-            {
-                imageController.SaveImage(path);
-            } 
-            catch(DirectoryNotFoundException e)
-            {
-                Assert.Fail("DirectoryNotFound exception : " + e);
-            }
-
-            Assert.AreEqual(imageController.LoadImage(path), false);*/
+            // Check that Save Image throws an exception when the path is not correct
+            imageController.SaveImage(path);
         }
 
         // Test loading of image
