@@ -55,22 +55,6 @@ namespace image_modification.controllers.classes
             Marshal.Copy(sourceData.Scan0, pixelBuffer, 0, pixelBuffer.Length);
             sourceBitmap.UnlockBits(sourceData);
 
-            if (grayscale == true)
-            {
-                for (int k = 0; k < pixelBuffer.Length; k += 4)
-                {
-                    float rgb = pixelBuffer[k] * 0.11f;
-                    rgb += pixelBuffer[k + 1] * 0.59f;
-                    rgb += pixelBuffer[k + 2] * 0.3f;
-
-
-                    pixelBuffer[k] = (byte)rgb;
-                    pixelBuffer[k + 1] = pixelBuffer[k];
-                    pixelBuffer[k + 2] = pixelBuffer[k];
-                    pixelBuffer[k + 3] = 255;
-                }
-            }
-
             int filterWidth = filterMatrix.GetLength(1);
             int filterHeight = filterMatrix.GetLength(0);
 
@@ -142,21 +126,6 @@ namespace image_modification.controllers.classes
 
             Marshal.Copy(sourceData.Scan0, pixelBuffer, 0, pixelBuffer.Length);
             sourceBitmap.UnlockBits(sourceData);
-
-            if (grayscale == true)
-            {
-                for (int k = 0; k < pixelBuffer.Length; k += 4)
-                {
-                    float rgb = pixelBuffer[k] * 0.11f;
-                    rgb += pixelBuffer[k + 1] * 0.59f;
-                    rgb += pixelBuffer[k + 2] * 0.3f;
-
-                    pixelBuffer[k] = (byte)rgb;
-                    pixelBuffer[k + 1] = pixelBuffer[k];
-                    pixelBuffer[k + 2] = pixelBuffer[k];
-                    pixelBuffer[k + 3] = 255;
-                }
-            }
 
             int filterOffset = 1;
             for (int offsetY = filterOffset; offsetY <

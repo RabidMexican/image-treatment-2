@@ -15,6 +15,14 @@ namespace image_modification_test
     {
         private ImageController imageController;
 
+        private ImageModel original         = new ImageModel(Properties.Resources.Smiley, nameof(Properties.Resources.Smiley));
+        private ImageModel original_swap    = new ImageModel(Properties.Resources.SmileySwap, nameof(Properties.Resources.SmileySwap));
+        private ImageModel original_black   = new ImageModel(Properties.Resources.SmileyBlackAndWhite, nameof(Properties.Resources.SmileyBlackAndWhite));
+        private ImageModel original_rainbow = new ImageModel(Properties.Resources.SmileyRainbow, nameof(Properties.Resources.SmileyRainbow));
+        private ImageModel original_kirsh   = new ImageModel(Properties.Resources.SmileyEdgeKirsh, nameof(Properties.Resources.SmileyEdgeKirsh));
+        private ImageModel original_lap     = new ImageModel(Properties.Resources.SmileyEdgeLaplacian, nameof(Properties.Resources.SmileyEdgeLaplacian));
+        private ImageModel original_prewitt = new ImageModel(Properties.Resources.SmileyEdgePrewitt, nameof(Properties.Resources.SmileyEdgePrewitt));
+
         // Test saving image
         [TestMethod]
         public void SaveImage()
@@ -25,11 +33,6 @@ namespace image_modification_test
             var filterRepository = Substitute.For<IFilterController>();
             var edgeDetRepository = Substitute.For<IEdgeDetectionController>();
             imageController = new ImageController(filterRepository, edgeDetRepository);
-
-            // Get resource images
-            ImageModel original = new ImageModel(
-                Properties.Resources.Smiley,
-                nameof(Properties.Resources.Smiley));
 
             // Save and recouperate the image
             imageController.image = original;
@@ -44,23 +47,43 @@ namespace image_modification_test
             Assert.AreEqual(originalHash, testHash);
         }
 
-        // Test loading of image
         [TestMethod]
-        public void LoadImage()
+        public void SaveImage_Exception_DirectoryNotFound()
         {
-      
-            string path = @"C:\Tests\Smiley.png";
+/*            string path = @"Z:\Tests\Smiley.png";
 
             // Create substitutes for interfaces
             var filterRepository = Substitute.For<IFilterController>();
             var edgeDetRepository = Substitute.For<IEdgeDetectionController>();
             imageController = new ImageController(filterRepository, edgeDetRepository);
 
-            // Get resource images
-            ImageModel original = new ImageModel(
-                Properties.Resources.Smiley,
-                nameof(Properties.Resources.Smiley));
+            // Save and recouperate the image
+            imageController.image = original;
 
+            try
+            {
+                imageController.SaveImage(path);
+            } 
+            catch(DirectoryNotFoundException e)
+            {
+                Assert.Fail("DirectoryNotFound exception : " + e);
+            }
+
+            Assert.AreEqual(imageController.LoadImage(path), false);*/
+        }
+
+        // Test loading of image
+        [TestMethod]
+        public void LoadImage()
+        {
+            string path = @"C:\Tests\Smiley.png";
+
+            // Create substitutes for interfaces
+            var filterRepository = Substitute.For<IFilterController>();
+            var edgeDetRepository = Substitute.For<IEdgeDetectionController>();
+
+            // Create controller
+            imageController = new ImageController(filterRepository, edgeDetRepository);
             imageController.LoadImage(path);
 
             // Get hash of images
@@ -73,9 +96,44 @@ namespace image_modification_test
 
         // Test image result
         [TestMethod]
-        public void GetResultImage()
+        public void GetResultImage_Preview()
         {
-            Assert.IsTrue(false);
+            // Create substitutes for interfaces
+            var filterRepository = Substitute.For<IFilterController>();
+            var edgeDetRepository = Substitute.For<IEdgeDetectionController>();
+
+            // Create controller
+            imageController = new ImageController(filterRepository, edgeDetRepository);
+            imageController.image = original;
+
+            // Exectute test
+            ImageModel previewImage = imageController.GetPreviewImage(500);
+            ImageModel testImage = imageController.GetResultImage(500);
+
+            // Compare
+            string originalHash = TestFunctions.GetImageHash(previewImage);
+            string testHash = TestFunctions.GetImageHash(testImage);
+            Assert.AreEqual(originalHash, testHash);
+        }
+
+        [TestMethod]
+        public void GetResultImage_Full()
+        {
+            // Create substitutes for interfaces
+            var filterRepository = Substitute.For<IFilterController>();
+            var edgeDetRepository = Substitute.For<IEdgeDetectionController>();
+
+            // Create controller
+            imageController = new ImageController(filterRepository, edgeDetRepository);
+            imageController.image = original;
+
+            // Exectute test
+            ImageModel testImage = imageController.GetResultImage();
+
+            // Compare
+            string originalHash = TestFunctions.GetImageHash(original);
+            string testHash = TestFunctions.GetImageHash(testImage);
+            Assert.AreEqual(originalHash, testHash);
         }
 
         // Test additon of filter
@@ -86,9 +144,8 @@ namespace image_modification_test
             var filterRepository = Substitute.For<IFilterController>();
             var edgeDetRepository = Substitute.For<IEdgeDetectionController>();
 
-            imageController = new ImageController(filterRepository, edgeDetRepository);
-
             // Execute test
+            imageController = new ImageController(filterRepository, edgeDetRepository);
             imageController.AddFilter(1);
 
             // Check result 
@@ -165,8 +222,34 @@ namespace image_modification_test
         }
 
         // Test application of filters
-        [TestMethod()]
-        public void ApplyFilters()
+        [TestMethod]
+        public void ApplyFilters_Rainbow()
+        {
+            // Create substitutes for interfaces
+            var filterRepository = Substitute.For<IFilterController>();
+            var edgeDetRepository = Substitute.For<IEdgeDetectionController>();
+
+            // Create controller
+            imageController = new ImageController(filterRepository, edgeDetRepository);
+            imageController.AddFilter(0);
+
+            // Force result of filter so we don't have to calculate it
+            filterRepository.ApplyRainbowFilter(original).Returns(original_rainbow);
+
+            // Execute test
+            ImageModel testImage = imageController.ApplyFilters(original);
+
+            // Get hash of images
+            string originalHash = TestFunctions.GetImageHash(original_rainbow);
+            string testHash = TestFunctions.GetImageHash(testImage);
+
+            // Comparison
+            Assert.AreEqual(originalHash, testHash);
+        }
+
+        // Test application of filters
+        [TestMethod]
+        public void ApplyFilters_Swap()
         {
             // Create substitutes for interfaces
             var filterRepository = Substitute.For<IFilterController>();
@@ -176,23 +259,40 @@ namespace image_modification_test
             imageController = new ImageController(filterRepository, edgeDetRepository);
             imageController.AddFilter(1);
 
-            // Get resource images
-            ImageModel original = new ImageModel(
-                Properties.Resources.Smiley,
-                nameof(Properties.Resources.Smiley));
-
-            ImageModel result = new ImageModel(
-                Properties.Resources.SmileySwap,
-                nameof(Properties.Resources.Smiley));
-
             // Force result of filter so we don't have to calculate it
-            filterRepository.ApplySwapFilter(original).Returns<ImageModel>(result);
+            filterRepository.ApplySwapFilter(original).Returns(original_swap);
 
             // Execute test
             ImageModel testImage = imageController.ApplyFilters(original);
 
             // Get hash of images
-            string originalHash = TestFunctions.GetImageHash(result);
+            string originalHash = TestFunctions.GetImageHash(original_swap);
+            string testHash = TestFunctions.GetImageHash(testImage);
+
+            // Comparison
+            Assert.AreEqual(originalHash, testHash);
+        }
+
+        // Test application of filters
+        [TestMethod]
+        public void ApplyFilters_BlackAndWhite()
+        {
+            // Create substitutes for interfaces
+            var filterRepository = Substitute.For<IFilterController>();
+            var edgeDetRepository = Substitute.For<IEdgeDetectionController>();
+
+            // Create controller
+            imageController = new ImageController(filterRepository, edgeDetRepository);
+            imageController.AddFilter(2);
+
+            // Force result of filter so we don't have to calculate it
+            filterRepository.ApplyBlackWhiteFilter(original).Returns(original_black);
+
+            // Execute test
+            ImageModel testImage = imageController.ApplyFilters(original);
+
+            // Get hash of images
+            string originalHash = TestFunctions.GetImageHash(original_black);
             string testHash = TestFunctions.GetImageHash(testImage);
 
             // Comparison
@@ -201,7 +301,7 @@ namespace image_modification_test
 
         // Test application of edge detections
         [TestMethod]
-        public void ApplyEdgeDetection()
+        public void ApplyEdgeDetection_Laplacian()
         {
             // Create substitutes for interfaces
             var filterRepository = Substitute.For<IFilterController>();
@@ -211,23 +311,66 @@ namespace image_modification_test
             imageController = new ImageController(filterRepository, edgeDetRepository);
             imageController.AddEdgeDetection(0);
 
-            // Get resource images
-            ImageModel original = new ImageModel(
-                Properties.Resources.Smiley,
-                nameof(Properties.Resources.Smiley));
-
-            ImageModel result = new ImageModel(
-                Properties.Resources.SmileyEdgeLaplacian,
-                nameof(Properties.Resources.SmileyEdgeLaplacian));
-
             // Force result of edgeDetection so we don't have to calculate it
-            edgeDetRepository.ApplyLaplacian3x3(original).Returns<ImageModel>(result);
+            edgeDetRepository.ApplyLaplacian3x3(original).Returns(original_lap);
 
             // Execute test
             ImageModel testImage = imageController.ApplyEdgeDetection(original);
 
             // Get hash of images
-            string resultImageHash = TestFunctions.GetImageHash(result);
+            string resultImageHash = TestFunctions.GetImageHash(original_lap);
+            string realResultImageHash = TestFunctions.GetImageHash(testImage);
+
+            // Comparison
+            Assert.AreEqual(resultImageHash, realResultImageHash);
+        }
+
+        // Test application of edge detections
+        [TestMethod]
+        public void ApplyEdgeDetection_Prewitt()
+        {
+            // Create substitutes for interfaces
+            var filterRepository = Substitute.For<IFilterController>();
+            var edgeDetRepository = Substitute.For<IEdgeDetectionController>();
+
+            // Create controller
+            imageController = new ImageController(filterRepository, edgeDetRepository);
+            imageController.AddEdgeDetection(1);
+
+            // Force result of edgeDetection so we don't have to calculate it
+            edgeDetRepository.ApplyPrewitt(original).Returns(original_prewitt);
+
+            // Execute test
+            ImageModel testImage = imageController.ApplyEdgeDetection(original);
+
+            // Get hash of images
+            string resultImageHash = TestFunctions.GetImageHash(original_prewitt);
+            string realResultImageHash = TestFunctions.GetImageHash(testImage);
+
+            // Comparison
+            Assert.AreEqual(resultImageHash, realResultImageHash);
+        }
+
+        // Test application of edge detections
+        [TestMethod]
+        public void ApplyEdgeDetection_Kirsch()
+        {
+            // Create substitutes for interfaces
+            var filterRepository = Substitute.For<IFilterController>();
+            var edgeDetRepository = Substitute.For<IEdgeDetectionController>();
+
+            // Create controller
+            imageController = new ImageController(filterRepository, edgeDetRepository);
+            imageController.AddEdgeDetection(2);
+
+            // Force result of edgeDetection so we don't have to calculate it
+            edgeDetRepository.ApplyKirsch(original).Returns(original_kirsh);
+
+            // Execute test
+            ImageModel testImage = imageController.ApplyEdgeDetection(original);
+
+            // Get hash of images
+            string resultImageHash = TestFunctions.GetImageHash(original_kirsh);
             string realResultImageHash = TestFunctions.GetImageHash(testImage);
 
             // Comparison
@@ -246,14 +389,9 @@ namespace image_modification_test
 
             // Create controller
             imageController = new ImageController(filterRepository, edgeDetRepository);
-
-            // Get resource images
-            ImageModel original = new ImageModel(
-                Properties.Resources.Smiley,
-                nameof(Properties.Resources.Smiley));
+            imageController.image = original;
 
             // Perform test
-            imageController.image = original;
             ImageModel testImage = imageController.GetPreviewImage(PREVIEW_IMAGE_SIZE);
 
             // Check rendered preview image is the correct size
