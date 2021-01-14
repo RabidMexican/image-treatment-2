@@ -46,10 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controllers\IImageController.cs" />
     <Compile Include="ImageMatrix.cs" />
     <Compile Include="controllers\classes\EdgeDetectionController.cs" />
     <Compile Include="controllers\classes\FilterController.cs" />
-    <Compile Include="controllers\ImageController.cs" />
+    <Compile Include="controllers\classes\ImageController.cs" />
     <Compile Include="controllers\IEdgeDetectionController.cs" />
     <Compile Include="controllers\IFilterController.cs" />
     <Compile Include="models\ImageModel.cs" />

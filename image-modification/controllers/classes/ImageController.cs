@@ -9,7 +9,7 @@ using System;
 
 namespace image_modification.controllers
 {
-    public class ImageController
+    public class ImageController : IImageController
     {
         public ImageModel image;
         private IFilterController filterController;

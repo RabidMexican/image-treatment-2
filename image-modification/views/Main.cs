@@ -19,7 +19,7 @@ namespace image_modification.views
                     EDGE_PREWITT_3X3 = 1,
                     EDGE_KIRSCH = 2;
 
-        private ImageController imageController = new ImageController(new FilterController(), new EdgeDetectionController());
+        private IImageController imageController = new ImageController(new FilterController(), new EdgeDetectionController());
 
         public Main()
         {
