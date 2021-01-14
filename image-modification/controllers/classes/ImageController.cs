@@ -30,6 +30,7 @@ namespace image_modification.controllers.classes
         {
             this.filterController = filterController;
             this.edgeDetectionController = edgeController;
+            this.image = null;
         }
 
         public void SaveImage(string destination)
@@ -50,10 +51,10 @@ namespace image_modification.controllers.classes
                     streamWriter.Flush();
                     streamWriter.Close();
                 }
-                catch (DirectoryNotFoundException e)
+                catch (DirectoryNotFoundException)
                 {
-                    Console.WriteLine("Error saving image " + destination + "! The directory was not found!");
-                    Console.WriteLine(e);
+                    // If directory does not exist image should be null
+                    image = null;
                 }
                 
             }

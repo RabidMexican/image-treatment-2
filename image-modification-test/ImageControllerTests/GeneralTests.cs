@@ -27,14 +27,18 @@ namespace image_modification_test
             // Create substitutes for interfaces
             var filterRepository = Substitute.For<IFilterController>();
             var edgeDetRepository = Substitute.For<IEdgeDetectionController>();
-            imageController = new ImageController(filterRepository, edgeDetRepository);
 
-            // Save and recouperate the image
+            // Setup image controller
+            imageController = new ImageController(filterRepository, edgeDetRepository);
             imageController.image = original;
+
+            // Save image to disk
             imageController.SaveImage(path);
+
+            // Load saved image
             imageController.LoadImage(path);
 
-            // Get hash of images
+            // Get hash of saved and original image
             string originalHash = TestFunctions.GetImageHash(original);
             string testHash = TestFunctions.GetImageHash(imageController.image);
 
@@ -61,10 +65,12 @@ namespace image_modification_test
             }
             catch(DirectoryNotFoundException)
             {
+                // If exception is thrown then fail
                 Assert.Fail();
             }
-            // If no exception was thrown the test passes
-            Assert.IsTrue(true);
+            // Check that after loading a bogus directory that image is null
+            imageController.LoadImage(path);
+            Assert.AreEqual(imageController.image, null);
         }
 
         // Test loading of image
