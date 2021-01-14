@@ -7,11 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace image_modification_test
+namespace image_modification_test.ImageControllerTests
 {
 
     [TestClass]
-    public class ImageControllerTest
+    public class GeneralTests
     {
         private ImageController imageController;
 
