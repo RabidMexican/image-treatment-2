@@ -82,10 +82,12 @@ namespace image_modification.controllers.classes
                         }
                     }
 
+                    // Get RGB totals
                     blue    = factor * blue + bias;
                     green   = factor * green + bias;
                     red     = factor * red + bias;
-
+                    
+                    // Validate RGB totals
                     blue    =   (blue > 255 ? 255 : blue < 0 ? 0 : blue);
                     green   =   (green > 255 ? 255 : green < 0 ? 0 : green);
                     red     =   (red > 255 ? 255 : red < 0 ? 0 : red);
@@ -159,13 +161,15 @@ namespace image_modification.controllers.classes
                         }
                     }
 
+                    // Get totals of each color
                     blueTotal   =   Math.Sqrt((blueX * blueX) + (blueY * blueY));
                     greenTotal  =   Math.Sqrt((greenX * greenX) + (greenY * greenY));
                     redTotal    =   Math.Sqrt((redX * redX) + (redY * redY));
 
-                    blueTotal   = (blueTotal > 255 ? 255 : blueTotal < 0 ? 0 : blueTotal);
-                    greenTotal  = (greenTotal > 255 ? 255 : greenTotal < 0 ? 0 : greenTotal);
-                    redTotal    = (redTotal > 255 ? 255 : redTotal < 0 ? 0 : redTotal);
+                    // Check totals are valid
+                    if (blueTotal > 255) blueTotal = 255;
+                    if (greenTotal > 255) greenTotal = 255;
+                    if (redTotal > 255) redTotal = 255;
 
                     resultBuffer[byteOffset]        = (byte)(blueTotal);
                     resultBuffer[byteOffset + 1]    = (byte)(greenTotal);
