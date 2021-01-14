@@ -21,6 +21,6 @@ Mandatory elements in the unit tests (At least one of each):
 ✅ Use Nsubstitute to test exceptions  
 ✅ Use Nsubstitute to test void methods  
 ✅ Use Nsubstitute to test methods that return classes  
-⬜️ Cover 100% of the business layer code (inside interfaces)  
-⬜️ Short unit tests doing one thing at a time with explicit names  
+✅ Cover 100% of the business layer code (inside interfaces)  
+✅ Short unit tests doing one thing at a time with explicit names  
 
