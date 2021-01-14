@@ -7,9 +7,9 @@ using System.Drawing.Imaging;
 using System.IO;
 using System;
 
-namespace image_modification.controllers.classes
+namespace image_modification.controllers
 {
-    public class ImageController : IImageController
+    public class ImageController
     {
         public ImageModel image;
         private IFilterController filterController;

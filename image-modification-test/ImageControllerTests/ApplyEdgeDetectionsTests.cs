@@ -1,5 +1,5 @@
 ﻿using image_modification;
-using image_modification.controllers.classes;
+using image_modification.controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using System;
