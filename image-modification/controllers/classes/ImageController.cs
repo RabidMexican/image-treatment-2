@@ -146,7 +146,7 @@ namespace image_modification.controllers.classes
                 }
                 return result;
             }
-            catch (NullReferenceException e) {}
+            catch (NullReferenceException) {}
             return null;
             
         }

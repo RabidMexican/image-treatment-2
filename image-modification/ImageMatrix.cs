@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace image_modification.controllers.classes
-{
+namespace image_modification
+{ 
     public static class ImageMatrix
     {
         public static double[,] Laplacian3x3

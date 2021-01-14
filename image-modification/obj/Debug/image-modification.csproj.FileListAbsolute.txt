@@ -17,4 +17,3 @@ C:\Users\Victo\source\repos\image-treatment-2\image-modification\obj\Debug\image
 C:\Users\Victo\source\repos\image-treatment-2\image-modification\obj\Debug\image-modification.csproj.CoreCompileInputs.cache
 C:\Users\Victo\source\repos\image-treatment-2\image-modification\obj\Debug\image-modification.exe
 C:\Users\Victo\source\repos\image-treatment-2\image-modification\obj\Debug\image-modification.pdb
-C:\Users\benpo\git\image-modification\image-modification\obj\Debug\image-modification.csprojAssemblyReference.cache
