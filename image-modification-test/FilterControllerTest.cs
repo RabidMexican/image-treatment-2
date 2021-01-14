@@ -35,6 +35,18 @@ namespace image_modification_test
             Assert.AreEqual(resultImageHash, realResultImageHash);
         }
 
+        [TestMethod]
+        public void ApplyRainbowFilter_Exception_NullReference()
+        {
+            // Create an invalid image
+            ImageModel testImage = null;
+
+            // Apply filter on test image
+            ImageModel result = controller.ApplyRainbowFilter(testImage);
+
+            Assert.AreEqual(result, null);
+        }
+
         // Test swap filter
         [TestMethod]
         public void ApplySwapFilter()

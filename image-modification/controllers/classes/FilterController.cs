@@ -5,43 +5,45 @@ namespace image_modification.controllers.classes
 {
  public class FilterController : IFilterController
     {
-
-        
         // Apply the rainbow filter
         public ImageModel ApplyRainbowFilter(ImageModel image)
         {
-            Bitmap bmp = image.GetBitmapImage();
-            Bitmap result = new Bitmap(bmp.Width, bmp.Height);
-            int raz = bmp.Height / 4;
-
-            for (int i = 0; i < bmp.Width; i++)
+            try
             {
-                for (int x = 0; x < bmp.Height; x++)
+                Bitmap bmp = image.GetBitmapImage();
+                Bitmap result = new Bitmap(bmp.Width, bmp.Height);
+                int raz = bmp.Height / 4;
+
+                for (int i = 0; i < bmp.Width; i++)
                 {
-                    if (i < (raz))
+                    for (int x = 0; x < bmp.Height; x++)
                     {
-                        result.SetPixel(i, x, Color.FromArgb(bmp.GetPixel(i, x).R / 5, bmp.GetPixel(i, x).G, bmp.GetPixel(i, x).B));
-                    }
-                    else if (i < (raz * 2))
-                    {
-                        result.SetPixel(i, x, Color.FromArgb(bmp.GetPixel(i, x).R, bmp.GetPixel(i, x).G / 5, bmp.GetPixel(i, x).B));
-                    }
-                    else if (i < (raz * 3))
-                    {
-                        result.SetPixel(i, x, Color.FromArgb(bmp.GetPixel(i, x).R, bmp.GetPixel(i, x).G, bmp.GetPixel(i, x).B / 5));
-                    }
-                    else if (i < (raz * 4))
-                    {
-                        result.SetPixel(i, x, Color.FromArgb(bmp.GetPixel(i, x).R / 5, bmp.GetPixel(i, x).G, bmp.GetPixel(i, x).B / 5));
-                    }
-                    else
-                    {
-                        result.SetPixel(i, x, Color.FromArgb(bmp.GetPixel(i, x).R / 5, bmp.GetPixel(i, x).G / 5, bmp.GetPixel(i, x).B / 5));
+                        if (i < (raz))
+                        {
+                            result.SetPixel(i, x, Color.FromArgb(bmp.GetPixel(i, x).R / 5, bmp.GetPixel(i, x).G, bmp.GetPixel(i, x).B));
+                        }
+                        else if (i < (raz * 2))
+                        {
+                            result.SetPixel(i, x, Color.FromArgb(bmp.GetPixel(i, x).R, bmp.GetPixel(i, x).G / 5, bmp.GetPixel(i, x).B));
+                        }
+                        else if (i < (raz * 3))
+                        {
+                            result.SetPixel(i, x, Color.FromArgb(bmp.GetPixel(i, x).R, bmp.GetPixel(i, x).G, bmp.GetPixel(i, x).B / 5));
+                        }
+                        else if (i < (raz * 4))
+                        {
+                            result.SetPixel(i, x, Color.FromArgb(bmp.GetPixel(i, x).R / 5, bmp.GetPixel(i, x).G, bmp.GetPixel(i, x).B / 5));
+                        }
+                        else
+                        {
+                            result.SetPixel(i, x, Color.FromArgb(bmp.GetPixel(i, x).R / 5, bmp.GetPixel(i, x).G / 5, bmp.GetPixel(i, x).B / 5));
+                        }
                     }
                 }
+                return new ImageModel(result, image.name);
             }
-
-            return new ImageModel(result, image.name);
+            catch (NullReferenceException) { }
+            return null;
         }
 
         //apply filter that swaps all pixel colors

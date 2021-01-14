@@ -132,17 +132,23 @@ namespace image_modification.controllers.classes
         // Applys all filters in order
         public ImageModel ApplyFilters(ImageModel result)
         {
-            foreach(int filter in filters)
+            try
             {
-                switch(filter)
+                foreach (int filter in filters)
                 {
-                    case FILTER_RAINBOW:        result = filterController.ApplyRainbowFilter(result);       break;
-                    case FILTER_SWAP:           result = filterController.ApplySwapFilter(result);          break;
-                    case FILTER_BLACKWHITE:     result = filterController.ApplyBlackWhiteFilter(result);    break;
+                    switch (filter)
+                    {
+                        case FILTER_RAINBOW: result = filterController.ApplyRainbowFilter(result); break;
+                        case FILTER_SWAP: result = filterController.ApplySwapFilter(result); break;
+                        case FILTER_BLACKWHITE: result = filterController.ApplyBlackWhiteFilter(result); break;
 
+                    }
                 }
+                return result;
             }
-            return result;
+            catch (NullReferenceException e) {}
+            return null;
+            
         }
         
         // Applys all edge detections in order

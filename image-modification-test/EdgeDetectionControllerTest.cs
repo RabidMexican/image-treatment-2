@@ -60,32 +60,6 @@ namespace image_modification_test
             // Comparison
             Assert.AreEqual(resultImageHash, realResultImageHash);
         }
-
-        // Test Prewitt filter
-        [TestMethod]
-        public void TestApplyPrewitt_2()
-        {
-            // Get base image
-            ImageModel testImage = new ImageModel(
-              Properties.Resources.white,
-              nameof(Properties.Resources.white));
-
-            // Get filter result image
-            ImageModel realResult = new ImageModel(
-                Properties.Resources.white_prewitt,
-                nameof(Properties.Resources.white_prewitt));
-
-
-            // Apply filter on test image
-            ImageModel result = controller.ApplyPrewitt(testImage);
-
-            // Get hash of images
-            string resultImageHash = TestFunctions.GetImageHash(result);
-            string realResultImageHash = TestFunctions.GetImageHash(realResult);
-
-            // Comparison
-            Assert.AreEqual(resultImageHash, realResultImageHash);
-        }
         
         // Test Kirsch filter
         [TestMethod]
